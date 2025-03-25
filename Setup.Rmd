@@ -8,15 +8,30 @@ date: "2025-03-25"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Make sure to run "install.packages("renv")" in the console, and then run "renv::restore()" to retrieve the packages needed to run these markdown files.
+Make sure to run "install.packages("renv")" in the console, and then run "renv::restore()" to retrieve the packages needed to run these markdown files - this ensures that we are all using the same packages
 
-```{r}
+```{r, eval = FALSE}
 library(tidycensus)
 library(knitr)
 library(tidyverse)
 library(ggplot2)
 ```
 
+```{r}
+Sys.getenv("CENSUS_API_KEY")
+```
+
+```{r}
+#Run this chunk to view the vars within tidycensus 
+viewvars <- load_variables(2023, "acs5", cache = TRUE)
+view(viewvars)
+```
+
+```{r}
+#load in the needed variables from tidy census 
+#
+
+```
 
 ## R Markdown
 
