@@ -44,6 +44,24 @@ ggplot(texas_total_pop, aes(fill = B02001_001E)) +
   theme_void() +
   scale_fill_viridis_c(option = "turbo") 
 ```
+
+```{r}
+texas_food_stamps <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B22003_002",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+ggplot(texas_food_stamps, aes(fill = B22003_002E)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
 ```{r}
 houston_pop <- get_acs(
   state = "Texas",
@@ -65,6 +83,25 @@ ggplot(houston_pop, aes(fill = B02001_001E), (size = 0.00001)) +
   scale_fill_viridis_c(option = "turbo") 
 ```
 
+```{r}
+houston_food_stamps <- get_acs(
+  state = "Texas",
+  county = "Harris County",
+  geography = "tract",
+  variables = "B22003_002",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+
+# c("Austin County", "Brazoria County", "Chambers County", "Fort Bend County", "Galveston County", "Harris County", "Liberty County", "Montgomery County", "Waller County")
+```
+
+```{r}
+ggplot(houston_food_stamps, aes(fill = B22003_002E), (size = 0.00001)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
 
 ## R Markdown
 
