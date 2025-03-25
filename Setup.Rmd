@@ -12,6 +12,7 @@ Make sure to run "install.packages("renv")" in the console, and then run "renv::
 
 ```{r}
 library(tidycensus)
+library(knitr)
 library(tidyverse)
 library(ggplot2)
 ```
