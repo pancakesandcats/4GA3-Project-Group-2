@@ -29,9 +29,42 @@ view(viewvars)
 
 ```{r}
 #load in the needed variables from tidy census 
-#
-
+texas_total_pop <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_001",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
 ```
+
+```{r}
+ggplot(texas_total_pop, aes(fill = B02001_001E)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+```{r}
+houston_pop <- get_acs(
+  state = "Texas",
+  county = "Harris County",
+  geography = "tract",
+  variables = "B02001_001",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+
+# c("Austin County", "Brazoria County", "Chambers County", "Fort Bend County", "Galveston County", "Harris County", "Liberty County", "Montgomery County", "Waller County")
+```
+
+
+```{r}
+ggplot(houston_pop, aes(fill = B02001_001E), (size = 0.00001)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
 
 ## R Markdown
 
