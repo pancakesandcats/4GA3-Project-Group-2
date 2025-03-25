@@ -1,0 +1,37 @@
+---
+title: "Setup"
+output: html_document
+date: "2025-03-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Make sure to run "install.packages("renv")" in the console, and then run "renv::restore()" to retrieve the packages needed to run these markdown files.
+
+```{r}
+library(tidycensus)
+library(tidyverse)
+library(ggplot2)
+```
+
+
+## R Markdown
+
+Tidycensus variables to remember:
+
+Total population
+B02001_001 (or B01003_001)
+White population
+B02001_002
+Black population
+B02001_003
+Asian population
+B02001_005
+American Indian and Alaska Native population
+B02001_004
+Native Hawaiian or other pacific islander population
+B02001_006
+Latino population
+B03002_012
