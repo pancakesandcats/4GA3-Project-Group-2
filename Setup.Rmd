@@ -15,6 +15,8 @@ library(tidycensus)
 library(knitr)
 library(tidyverse)
 library(ggplot2)
+library(dplyr)
+library(sf)
 ```
 
 ```{r}
@@ -27,6 +29,8 @@ viewvars <- load_variables(2023, "acs5", cache = TRUE)
 view(viewvars)
 ```
 
+
+#Testing
 ```{r}
 #load in the needed variables from tidy census 
 texas_total_pop <- get_acs(
@@ -103,9 +107,140 @@ ggplot(houston_food_stamps, aes(fill = B22003_002E), (size = 0.00001)) +
   scale_fill_viridis_c(option = "turbo") 
 ```
 
-## R Markdown
+#Create dataframe will all races, food stamp usage, and control variables 
 
-Tidycensus variables to remember:
+##Load in the data: 
+
+```{r}
+food_stamps <- get_acs(
+ state = "Texas",
+  geography = "county",
+  variables = "B22003_002",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+white <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_002",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+black<- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_003",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+asian <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_005",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+american_indian_alaska_native <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_004",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+pacific_islander <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_006",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+other_race <- get_acs(
+  state = "Texas",
+  geography = "county",
+  variables = "B02001_007",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+#Rename columns for simplicity 
+names(food_stamps)[3] <- "food_stamp"
+names(white)[3] <- "white"
+names(black)[3] <- "black"
+names(asian)[3] <- "asian"
+names(american_indian_alaska_native)[3] <- "american_indian"
+names(pacific_islander)[3] <- "pacific_islander"
+names(other_race)[3] <- "other"
+```
+
+##Merging
+```{r}
+#Merge
+df_race <- white |>
+mutate(     
+    black = black$black,
+    asian = asian$asian,
+    american_indian = american_indian_alaska_native$american_indian,
+    pacific_islander = pacific_islander$pacific_islander,
+    other = other_race$other, 
+    food_stamp = food_stamps$food_stamp)
+
+```
+
+```{r}
+#remove uneeded column 
+df_race <- df_race[, -4]
+```
+
+```{r}
+#create a total population column
+df_race <- df_race |>
+  mutate(
+    total_pop = (black + asian + white + american_indian + pacific_islander + other)
+  )
+```
+
+#Per capita populations
+
+```{r}
+df_race <- df_race |>
+  mutate(
+    white_p = white/total_pop,
+    black_p = black/total_pop,
+    asian_p = asian/total_pop,
+    american_indian_p = american_indian/total_pop,
+    pacific_islander_p = pacific_islander/total_pop,
+    other_p = other/total_pop,
+    food_stamp_p = food_stamp/total_pop
+)
+```
+
+```{r}
+#save
+saveRDS(df_race, file = "df_race.rds")
+```
+
+
+Tidycensus variables: 
 
 Total population
 B02001_001 (or B01003_001)
@@ -119,5 +254,7 @@ American Indian and Alaska Native population
 B02001_004
 Native Hawaiian or other pacific islander population
 B02001_006
-Latino population
-B03002_012
+Some other race: 
+B02001_007
+
+Exclusions: Two or more races
