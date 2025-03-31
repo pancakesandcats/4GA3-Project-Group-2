@@ -16,7 +16,6 @@ library(knitr)
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
-library(sf)
 ```
 
 ```{r}
@@ -107,7 +106,7 @@ ggplot(houston_food_stamps, aes(fill = B22003_002E), (size = 0.00001)) +
   scale_fill_viridis_c(option = "turbo") 
 ```
 
-#Create dataframe will all races, food stamp usage, and control variables 
+#Create Dataframe
 
 ##Load in the data: 
 
@@ -192,7 +191,7 @@ names(pacific_islander)[3] <- "pacific_islander"
 names(other_race)[3] <- "other"
 ```
 
-##Merging
+##Merge
 ```{r}
 #Merge
 df_race <- white |>
@@ -219,7 +218,7 @@ df_race <- df_race |>
   )
 ```
 
-#Per capita populations
+##Per capita populations
 
 ```{r}
 df_race <- df_race |>
@@ -237,6 +236,11 @@ df_race <- df_race |>
 ```{r}
 #save
 saveRDS(df_race, file = "df_race.rds")
+```
+
+#To Evoke: 
+```{r}
+readRDS("df_race.rds")
 ```
 
 
