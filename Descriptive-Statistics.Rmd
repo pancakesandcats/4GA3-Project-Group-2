@@ -13,7 +13,9 @@ Define racial diversity:
 
 # Tables
 
-# Maps
+
+
+# Choropleths
 
 (load df_race.rds)
 
@@ -77,13 +79,14 @@ ggplot(df_race, aes(fill = food_stamp_p)) +
 
 ```{r}
 # st_transform(df_race)
-st_transform(df_race, crs = 4326)
+df_race_3857 <- st_transform(df_race, crs = 3857)
+# the crs system meant to be used for cartograms but idk why it's not working :(
 ```
 
 
 ```{r}
 # The function `cartogram_cont()` constructs a continuous area cartogram. Here, a cartogram is created for census tracts of the city of Hamilton, but the size of the zones will be weighted by the variable `POPULATION`.
-CT_pop_cartogram <- cartogram_cont(df_race, weight = "total_pop")
+CT_pop_cartogram <- cartogram_cont(df_race_3857, weight = "total_pop")
 
 #We are using "ggplot" to create a cartogram for populations by census tact in Hamilton. Census tracts with a larger value are distorted to visually represent their population size. The number "5" after calling the population variable states that there will be 5 categories dividing population quantities.
 ggplot(CT_pop_cartogram) + 
@@ -95,6 +98,25 @@ ggplot(CT_pop_cartogram) +
 # Graphs
 
 ```{r, total pop versus food stamp usage}
+ggplot(df_race, aes(x = total_pop, y = food_stamps)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Total Population in Census Tract', y = 'Total Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+# this one could serve as a control variable perhaps?
+```
+
+```{r, white prop versus food stamp prop}
+ggplot(df_race, aes(x = white_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of White Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r, black prop versus food stamp prop}
 ggplot(df_race, aes(x = black_p, y = food_stamp_p)) +
 geom_point(size = 0.75) +
   geom_smooth(method = "lm", se = FALSE, color = "grey") +
@@ -103,3 +125,91 @@ geom_point(size = 0.75) +
 # for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
 ```
 
+```{r, asian prop versus food stamp prop}
+ggplot(df_race, aes(x = asian_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Asian Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r, black prop versus food stamp prop}
+ggplot(df_race, aes(x = american_indian_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of American Indian Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r, black prop versus food stamp prop}
+ggplot(df_race, aes(x = pacific_islander_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Pacific Islander Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r, black prop versus food stamp prop}
+ggplot(df_race, aes(x = other_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Other Populations in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r}
+ggplot(df_race, aes(x = pacific_islander_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Pacific Islander Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
+```{r, black prop versus food stamp prop}
+ggplot(df_race, aes(x = c(black_p + asian_p + american_indian_p + pacific_islander_p + other_p), y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Non-White Populations in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+# this one combines all the non-white populations in the df
+```
+
+# Other graphs:
+
+```{r}
+ggplot(df_race, aes(x = black_p, y = food_stamp_p)) +
+  geom_boxplot()
+# box plots aren't great for sets with many points of data like this
+```
+
+```{r}
+df_race$black_prop <- as.factor(df_race$black_p)
+head(df_race)
+```
+
+
+```{r, violin plot}
+ggplot(df_race, aes(x = white_p, y = food_stamp_p)) +
+  geom_violin()
+# not sure what to use as a z_value for the fill
+```
+
+```{r, violin plot}
+ggplot(df_race, aes(x = black_prop, y = food_stamp_p)) +
+  geom_violin()
+# not sure what to use as a z_value for the fill
+# doesn't seem to matter whether i use black_p or black_prop
+```
+
+```{r, violin plot}
+ggplot(df_race, aes(x = asian_p, y = food_stamp_p)) +
+  geom_violin() +
+  theme_classic()
+# not sure what to use as a z_value for the fill
+```
