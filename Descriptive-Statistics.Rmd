@@ -1,0 +1,105 @@
+---
+title: "Descriptive Statistics"
+output: html_notebook
+---
+
+```{r}
+library(sf)
+library(cartogram)
+```
+
+
+Define racial diversity:
+
+# Tables
+
+# Maps
+
+(load df_race.rds)
+
+```{r}
+ggplot(df_race, aes(fill = total_pop)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = white_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = black_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = asian_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = american_indian_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = pacific_islander_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = other_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r}
+ggplot(df_race, aes(fill = food_stamp_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+# Cartograms
+
+```{r}
+# st_transform(df_race)
+st_transform(df_race, crs = 4326)
+```
+
+
+```{r}
+# The function `cartogram_cont()` constructs a continuous area cartogram. Here, a cartogram is created for census tracts of the city of Hamilton, but the size of the zones will be weighted by the variable `POPULATION`.
+CT_pop_cartogram <- cartogram_cont(df_race, weight = "total_pop")
+
+#We are using "ggplot" to create a cartogram for populations by census tact in Hamilton. Census tracts with a larger value are distorted to visually represent their population size. The number "5" after calling the population variable states that there will be 5 categories dividing population quantities.
+ggplot(CT_pop_cartogram) + 
+  geom_sf(aes(fill = cut_number(total_pop, 5)), color = "white", size = 0.1) +
+  scale_fill_brewer(palette = "YlOrRd") +
+  labs(fill = "Population")
+```
+
+# Graphs
+
+```{r, total pop versus food stamp usage}
+ggplot(df_race, aes(x = black_p, y = food_stamp_p)) +
+geom_point(size = 0.75) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+  labs(x = 'Proportion of Black Population in Census Tract', y = 'Proportion of Food Stamps Used in Census Tract') +
+  theme_classic()
+# for help with lines of best fit: https://aosmith.rbind.io/2018/11/16/plot-fitted-lines/
+```
+
