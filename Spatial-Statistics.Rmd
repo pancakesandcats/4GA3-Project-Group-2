@@ -1,0 +1,94 @@
+---
+title: "Spatial Statistics"
+output: html_document
+date: "2025-04-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+
+## NICOLE and EMMA start work here: 
+
+## Load packages
+
+``` {r packages}
+library(tidycensus) 
+library(tidyverse)   
+library(sf)          
+library(spdep)      
+library(plotly)  
+library(cartogram)
+```
+
+```{r}
+df_race <- readRDS("df_race.rds")
+```
+
+## Wanted to visualize food stamp usage
+```{r}
+ggplot(df_race) +
+  geom_sf(aes(fill = food_stamp_p), color = NA) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  labs(title = "Food Stamp Usage per Capita in Texas",
+       fill = "Food Stamp %")
+
+## can you fact check me on whether its supposed to be capita or county 
+```
+
+```{r}
+df_race_proj <- st_transform(df_race, crs = 3857)
+```
+
+## Trying to make cartograms but I get warning: NA not allowed in weight vector. Features will be removed from shape. PLS HELP! 
+```{r}
+carto_foodstamp <- cartogram_cont(df_race_proj, weight = "food_stamp_p")
+```
+
+``` {r}
+ggplot(carto_foodstamp) + 
+  geom_sf(aes(fill = cut_number(food_stamp_p, 5)), color = "white", size = 0.1) +
+  scale_fill_brewer(palette = "YlOrRd") +
+  theme_minimal() +
+  labs(
+    title = "Cartogram of Food Stamp Usage per Capita in Texas",
+    fill = "Food Stamp % (binned)"
+  )
+```
+
+## Set up the neighbourhood and weights (Need help w neighbourhood!) 
+
+```{r}
+df_race.nb <- poly2nb(df_race_proj)
+
+# Error in poly2nb(df_race_proj) : Empty geometries found
+```
+```{r}
+df_race.nb <- poly2nb(df_race_proj)
+
+# Error in poly2nb(df_race_proj) : Empty geometries found - can someone please help with this fix :') 
+```
+
+```{r}
+df_race.w <- nb2listw(df_race.nb)
+```
+
+# Spatial Moving Averages
+```{r}
+df_race_proj$food_stamp_sma <- lag.listw(df_race.w, df_race_proj$food_stamp_p)
+```
+# Can we plot these spatial moving averages? 
+```{r}
+ggplot() +
+```
+
+# Trying to Map Morans I for foodstamps (unfinished because previous code not working)
+```{r}
+foodstamp_morans <- localmoran(df_race_proj$food_stamp_p, df_race.w)
+```
