@@ -8,6 +8,8 @@ date: "2025-03-25"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+
 Make sure to run "install.packages("renv")" in the console, and then run "renv::restore()" to retrieve the packages needed to run these markdown files - this ensures that we are all using the same packages
 
 ```{r, eval = FALSE}
@@ -111,6 +113,49 @@ ggplot(houston_food_stamps, aes(fill = B22003_002E), (size = 0.00001)) +
 ##Load in the data: 
 
 ```{r}
+#median household income
+income <- get_acs(
+ state = "Texas",
+  geography = "tract",
+  variables = "B19013_001",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+
+```{r}
+unemployed <- get_acs(
+ state = "Texas",
+  geography = "tract",
+  variables = "B23025_005",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+lf <- get_acs(
+ state = "Texas",
+  geography = "tract",
+  variables = "B23025_003",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+```{r}
+children <- get_acs(
+ state = "Texas",
+  geography = "tract",
+  variables = "B11003_001",
+  geometry = TRUE,
+  output = "wide",
+  year = 2022)
+```
+
+
+```{r}
 food_stamps <- get_acs(
  state = "Texas",
   geography = "tract",
@@ -189,6 +234,10 @@ names(asian)[3] <- "asian"
 names(american_indian_alaska_native)[3] <- "american_indian"
 names(pacific_islander)[3] <- "pacific_islander"
 names(other_race)[3] <- "other"
+names(income)[3] <- "income"
+names(children)[3] <- "children"
+names(lf)[3] <- "lf"
+names(unemployed)[3] <- "unemployed"
 ```
 
 ##Merge
@@ -201,8 +250,11 @@ mutate(
     american_indian = american_indian_alaska_native$american_indian,
     pacific_islander = pacific_islander$pacific_islander,
     other = other_race$other, 
-    food_stamp = food_stamps$food_stamp)
-
+    food_stamp = food_stamps$food_stamp, 
+    children = children$children,
+    lf = lf$lf, 
+    unemployed = unemployed$unemployed, 
+    income = income$income)
 ```
 
 ```{r}
@@ -229,20 +281,22 @@ df_race <- df_race |>
     american_indian_p = american_indian/total_pop,
     pacific_islander_p = pacific_islander/total_pop,
     other_p = other/total_pop,
-    food_stamp_p = food_stamp/total_pop
+    food_stamp_p = food_stamp/total_pop,
+    unemployment_rate = unemployed/lf,
+    children_p = children/total_pop
 )
 ```
 
+
+#Save: 
 ```{r}
-#save
-saveRDS(df_race, file = "df_race.rds")
+save(df_race, file = "df_race.RData")
 ```
 
 #To Evoke: 
 ```{r}
-readRDS("df_race.rds")
+load("df_race.RData")
 ```
-
 
 Tidycensus variables: 
 

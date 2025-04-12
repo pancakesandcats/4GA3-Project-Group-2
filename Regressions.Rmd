@@ -1,0 +1,45 @@
+---
+title: "Regressions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list = ls())
+```
+
+```{r, eval = FALSE, message = FALSE}
+pkgs <- c("plotly", "spdep")
+install.packages(pkgs)
+```
+
+```{r, message = FALSE}
+library(tidycensus)
+library(knitr)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(sf)
+library(tidyverse)
+library(units)
+library(spdep)
+```
+
+```{r}
+load("df_race.RData")
+```
+
+
+```{r}
+model_linear <- lm(food_stamp_p ~ white_p + black_p +  asian_p + american_indian_p + pacific_islander_p + other_p + income + children_p + unemployment_rate, data = df_race)
+
+summary(model_linear)
+```
+
+
+
+
