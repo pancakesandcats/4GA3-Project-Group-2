@@ -46,33 +46,18 @@ ggplot(df_race) +
 df_race_proj <- st_transform(df_race, crs = 3857)
 ```
 
-## Trying to make cartograms but I get warning: NA not allowed in weight vector. Features will be removed from shape. PLS HELP! 
-```{r}
-carto_foodstamp <- cartogram_cont(df_race_proj, weight = "food_stamp_p")
-```
+## Filtering out values that had NA 
 
 ``` {r}
-ggplot(carto_foodstamp) + 
-  geom_sf(aes(fill = cut_number(food_stamp_p, 5)), color = "white", size = 0.1) +
-  scale_fill_brewer(palette = "YlOrRd") +
-  theme_minimal() +
-  labs(
-    title = "Cartogram of Food Stamp Usage per Capita in Texas",
-    fill = "Food Stamp % (binned)"
-  )
+df_race_filter <- df_race_proj %>%
+  filter(!is.na(food_stamp_p))
 ```
 
-## Set up the neighbourhood and weights (Need help w neighbourhood!) 
 
+# Set up the neighbourhood and weights 
 ```{r}
-df_race.nb <- poly2nb(df_race_proj)
+df_race.nb <- poly2nb(df_race_filter)
 
-# Error in poly2nb(df_race_proj) : Empty geometries found
-```
-```{r}
-df_race.nb <- poly2nb(df_race_proj)
-
-# Error in poly2nb(df_race_proj) : Empty geometries found - can someone please help with this fix :') 
 ```
 
 ```{r}
@@ -81,14 +66,240 @@ df_race.w <- nb2listw(df_race.nb)
 
 # Spatial Moving Averages
 ```{r}
-df_race_proj$food_stamp_sma <- lag.listw(df_race.w, df_race_proj$food_stamp_p)
+df_race_filter <- df_race_filter %>%
+  mutate(sma_food_stamp_p = lag.listw(df_race.w, food_stamp_p))
 ```
-# Can we plot these spatial moving averages? 
+# Plotting SMA
 ```{r}
-ggplot() +
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_food_stamp_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average of Food Stamp Usage in Texas",
+    fill = "SMA Food Stamp %"
+  )
+```
+# Creating a null landscape for SMA 
+``` {r}
+set.seed(2025)
+
+df_race_filter <- df_race_filter %>%
+  mutate(food_stamp_random = sample(food_stamp_p))
 ```
 
-# Trying to Map Morans I for foodstamps (unfinished because previous code not working)
+``` {r}
+df_race_filter <- df_race_filter %>%
+  mutate(sma_food_stamp_random = lag.listw(df_race.w, food_stamp_random))
+```
+
+
+# Plotting the null landscape SMA 
+``` {r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_food_stamp_random), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average (Null Landscape)",
+    fill = "SMA (Randomized)"
+  )
+```
+# SMA for Each Race
 ```{r}
-foodstamp_morans <- localmoran(df_race_proj$food_stamp_p, df_race.w)
+df_race_filter <- df_race_filter %>%
+  mutate(
+    sma_white_p = lag.listw(df_race.w, white_p),
+    sma_black_p = lag.listw(df_race.w, black_p),
+    sma_asian_p = lag.listw(df_race.w, asian_p),
+    sma_american_indian_p = lag.listw(df_race.w, american_indian_p),
+    sma_pacific_islander_p = lag.listw(df_race.w, pacific_islander_p),
+    sma_other_p = lag.listw(df_race.w, other_p)
+  )
+```
+# Mapping SMA for Each Race
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_white_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % White Population",
+    fill = "SMA (% White)"
+  )
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_black_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Black Population",
+    fill = "SMA (% Black)"
+  )
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_asian_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Asian Population",
+    fill = "SMA (% Asian)"
+  )
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_american_indian_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % American Indian Population",
+    fill = "SMA (% American Indian)"
+  )
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_pacific_islander_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Pacific Islander Population",
+    fill = "SMA (% Pacific Islander)"
+  )
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_other_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Other Population",
+    fill = "SMA (% Other)"
+  )
+```
+ 
+# Local G 
+``` {r}
+foodstamps_g <- localG(df_race_filter$food_stamp_p, df_race.w)
+
+```
+
+```{r}
+df_race_filter$foodstamps_g <- as.numeric(foodstamps_g)
+```
+
+``` {r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = foodstamps_g), color = "NA") +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis of Food Stamp Usage")
+```
+# Gi* on Null Landscape 
+``` {r}
+foodstamps_g_null <- localG(df_race_filter$food_stamp_random, df_race.w)
+```
+
+```{r}
+df_race_filter$foodstamps_g_null <- as.numeric(foodstamps_g_null)
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = foodstamps_g_null), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score (Null)"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis of Food Stamp Usage (Null Landscape)")
+```
+# Gi* for each race
+``` {r}
+df_race_filter <- df_race_filter %>%
+  mutate(
+    g_white = as.numeric(localG(white_p, df_race.w)),
+    g_black = as.numeric(localG(black_p, df_race.w)),
+    g_asian = as.numeric(localG(asian_p, df_race.w)),
+    g_american_indian = as.numeric(localG(american_indian_p, df_race.w)),
+    g_pacific_islander = as.numeric(localG(pacific_islander_p, df_race.w)),
+    g_other = as.numeric(localG(other_p, df_race.w))
+  )
+```
+
+#Gi* Plots for each race
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_white), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % White Population")
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_black), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Black Population")
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_asian), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Asian Population")
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_american_indian), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % American Indian Population")
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_pacific_islander), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Pacific Islander Population")
+```
+
+```{r}
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_other), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Other Population")
 ```
