@@ -101,7 +101,7 @@ ggplot(df_race_filter) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
   theme_minimal() +
   labs(
-    title = "Spatial Moving Average (Null Landscape)",
+    title = "Spatial Moving Average of Food Stamp Usage (Null Landscape)",
     fill = "SMA (Randomized)"
   )
 ```
