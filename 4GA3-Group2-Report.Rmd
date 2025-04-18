@@ -250,6 +250,296 @@ ggplot(df_race, aes(fill = food_stamp_p)) +
   scale_fill_viridis_c(option = "turbo")
 ```
 
+## Spatial Statistics 
+
+
+```{r}
+df_race <- readRDS("df_race.rds")
+```
+
+### Chloropleth Visualization of Food Stamp Usage in Texas
+```{r}
+ggplot(df_race) +
+  geom_sf(aes(fill = food_stamp_p), color = NA) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  labs(title = "Food Stamp Usage per Capita in Texas",
+       fill = "Food Stamp %")
+
+```
+
+### Spatial Moving Averages 
+```{r}
+df_race_proj <- st_transform(df_race, crs = 3857) # Defining the projection for the df_race dataset 
+```
+
+``` {r}
+df_race_filter <- df_race_proj %>% # Filtering out any counties that had values of "NA" for food stamp usage
+  filter(!is.na(food_stamp_p))
+```
+
+```{r}
+df_race.nb <- poly2nb(df_race_filter) # Setting up the neighbhourhood function 
+
+df_race.w <- nb2listw(df_race.nb) # Creating the weighted matrix 
+```
+
+
+```{r}
+# Spatial Moving Averages for Food Stamp Usage 
+df_race_filter <- df_race_filter %>%
+  mutate(sma_food_stamp_p = lag.listw(df_race.w, food_stamp_p))
+
+# Plotting SMA for Food Stamps 
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_food_stamp_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average of Food Stamp Usage in Texas",
+    fill = "SMA Food Stamp %"
+  )
+```
+
+``` {r}
+# Creating a Null Landscape for the SMA of Food Stamp Usage
+set.seed(2025)
+
+df_race_filter <- df_race_filter %>%
+  mutate(food_stamp_random = sample(food_stamp_p))
+
+df_race_filter <- df_race_filter %>%
+  mutate(sma_food_stamp_random = lag.listw(df_race.w, food_stamp_random))
+
+# Plotting the Null Landscape for the SMA of Food Stamp Usage
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_food_stamp_random), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average of Food Stamp Usage (Null Landscape)",
+    fill = "SMA (Randomized)"
+  )
+```
+
+
+```{r}
+# Computing SMA for Each Race
+df_race_filter <- df_race_filter %>%
+  mutate(
+    sma_white_p = lag.listw(df_race.w, white_p),
+    sma_black_p = lag.listw(df_race.w, black_p),
+    sma_asian_p = lag.listw(df_race.w, asian_p),
+    sma_american_indian_p = lag.listw(df_race.w, american_indian_p),
+    sma_pacific_islander_p = lag.listw(df_race.w, pacific_islander_p),
+    sma_other_p = lag.listw(df_race.w, other_p)
+  )
+```
+
+```{r}
+# Mapping SMA for the White Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_white_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % White Population",
+    fill = "SMA (% White)"
+  )
+```
+
+```{r}
+# Mapping SMA for the Black Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_black_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Black Population",
+    fill = "SMA (% Black)"
+  )
+```
+
+```{r}
+# Mapping SMA for the Asian Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_asian_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Asian Population",
+    fill = "SMA (% Asian)"
+  )
+```
+
+```{r}
+# Mapping SMA for the American Indian Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_american_indian_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % American Indian Population",
+    fill = "SMA (% American Indian)"
+  )
+```
+
+```{r}
+# Mapping SMA for the Pacific Islander Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_pacific_islander_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Pacific Islander Population",
+    fill = "SMA (% Pacific Islander)"
+  )
+```
+
+```{r}
+# Mapping SMA for the Other Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = sma_other_p), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  theme_minimal() +
+  labs(
+    title = "Spatial Moving Average: % Other Population",
+    fill = "SMA (% Other)"
+  )
+```
+ 
+ The Spatial Moving Average (SMA) map for food stamp usage reveals a clear spatial clustering pattern, particularly concentrated in the southern and southwestern regions of Texas. These clusters are characterized by darker shading, indicating that high food stamp usage is not randomly distributed but spatially grouped. This visual pattern is further supported when compared to the randomized null SMA map, which lacks any coherent structure or concentration, reinforcing the idea that the observed clustering is meaningful rather than due to chance. When the food stamp map is visually compared to the SMA maps for racial demographics, some alignment emerges, but the degree of overlap varies across groups. For example, the Black population displays strong clustering in the eastern part of the state, where there is also notable food stamp usage, suggesting a potential spatial relationship. The white population is more heavily clustered in central and northwestern Texas, with only partial overlap in the southwest, where some food stamp clustering also appears. Other racial groups, including Asian, American Indian, Pacific Islander, and those categorized as “Other” show more dispersed or minimal clustering, making spatial comparisons less conclusive. Overall, while visual analysis of the SMA maps highlights several potential co-located clusters, especially for the Black population, these observations remain exploratory. The spatial clustering suggests areas of concentrated socio-economic vulnerability, but the strength of the relationship between race and food stamp usage would require more rigorous statistical testing to confirm.
+
+
+### Local G 
+``` {r}
+# Local G for Foodstamp Usage
+foodstamps_g <- localG(df_race_filter$food_stamp_p, df_race.w)
+
+df_race_filter$foodstamps_g <- as.numeric(foodstamps_g)
+```
+
+
+``` {r}
+# Plotting Local G for Food Stamp Usage
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = foodstamps_g), color = "NA") +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis of Food Stamp Usage")
+```
+``` {r}
+# Local G on Null Landscape
+foodstamps_g_null <- localG(df_race_filter$food_stamp_random, df_race.w)
+
+df_race_filter$foodstamps_g_null <- as.numeric(foodstamps_g_null)
+```
+
+```{r}
+# Plotting Local G on Null Landscape
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = foodstamps_g_null), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score (Null)"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis of Food Stamp Usage (Null Landscape)")
+```
+
+## Gi* for Each Race
+``` {r}
+# Computing Local G for Each Race
+df_race_filter <- df_race_filter %>%
+  mutate(
+    g_white = as.numeric(localG(white_p, df_race.w)),
+    g_black = as.numeric(localG(black_p, df_race.w)),
+    g_asian = as.numeric(localG(asian_p, df_race.w)),
+    g_american_indian = as.numeric(localG(american_indian_p, df_race.w)),
+    g_pacific_islander = as.numeric(localG(pacific_islander_p, df_race.w)),
+    g_other = as.numeric(localG(other_p, df_race.w))
+  )
+```
+
+```{r}
+#Gi* Plots for the White Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_white), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % White Population")
+```
+
+```{r}
+#Gi* Plots for the Black Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_black), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Black Population")
+```
+
+```{r}
+#Gi* Plots for the Asian Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_asian), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Asian Population")
+```
+
+```{r}
+#Gi* Plots for the American Indian Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_american_indian), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % American Indian Population")
+```
+
+```{r}
+#Gi* Plots for the Pacific Islander Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_pacific_islander), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Pacific Islander Population")
+```
+
+```{r}
+#Gi* Plots for the Other Population
+ggplot(df_race_filter) +
+  geom_sf(aes(fill = g_other), color = NA) +
+  scale_fill_gradient2(
+    low = "green", mid = "yellow", high = "red", midpoint = 0,
+    name = "Gi* Z-Score"
+  ) +
+  theme_minimal() +
+  labs(title = "Gi* Hotspot Analysis: % Other Population")
+```
+
+The Gi* analysis reveals statistically significant spatial clustering in food stamp usage and racial group distributions across Texas. For food stamp usage, there are strong hotspots (red) in the southwestern and southern parts of the state, indicating counties where food stamp reliance is significantly higher than expected. This hotspot regions are especially seen in the southern border like Rio Grande Valley, reflecting socio-economic challenges faced in that region. A null landscape of food stamps usage was created and confirmed with mapping that these clustered are statistically significant and not random. It highlighted how poverty is geographically concentrated in historically marginalized areas. When examining the racial distribution, distinct spatial patterns were een. Areas with lower White population densities (coldspots) largely overlap with food stamp usage hotspots. It suggest that food insecurity is more prevalent in counties of Texas with higher proportion of non-White residents. Meanwhile, Asian population hotspots are tightly clustered around urban areas like Houston or Dallas. There is some overlap in these areas with high food stamp usage. It suggest that the Asian community have a better socioeconomic condition in comparison to the others. The American Indian population shows a moderate and localized clustering of Indigenous population. The clusters are seen as rural west and central Texas. Some American Indian hotspots coincide with regions of higher food insecurity, suggesting that rural Indigenous communities face more greater challenges. As they are more isolated geographically and have limited economic opportunities in comparison to the others. However, the clustering is less intense and continuous in compared to the other racial groups. These results reflect a more smaller and more disperse population of American Indian across the region of Texas. 
+	The Black population, the hotspots are concentrated east of Texas and major urban centers and shows a great amount of overlap with food stamp usage. This spatial pattern reveals the enduring impact of historical racial segregation and economic marginalization. On the other hand, Pacific Island population hotspots are more isolated and scattered. This is may be likely due to relatively small population numbers. Lastly the other racial category, likely capture multiracial and diverse ethnic groups. This “Other” racial category forms strong hotspots in west Texas and aligns with food stamp hotpots. It suggest that those that are racially diverse population may experience heightened economic vulnerability. 
+	Overall these results show that food insecurity in Texas is not evenly distributed and is tied to racial and geographic factors. Minority and marginalized racial groups are likely to be concentrated in regions with persistent poverty. While certain urban population experience stability. The geographic overlap between racial demographics and food insecurity highlights deeper systemic inequalities, emphasizing the importance of implementing social and economic policies that account for both racial and regional differences.
+
 
 ##Regression Analyses 
 
