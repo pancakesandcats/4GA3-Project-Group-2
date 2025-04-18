@@ -57,17 +57,19 @@ library(textreg)
 library(viridis) #Viridis colour scheme for mapping
 library(tidycensus)
 ```
-
+\newpage
 # Introduction
 
-Approximately 18 million households experienced food insecurity at some point in 2023, with almost 7 million facing very low food insecurity (USDA, 2025). This makes up 13.5% of the total households in the United States of America, an increase of approximately one million households from 2022. Texas holds the second-highest rate of all states. 16.9% of Texas households face food insecurity in 2023 (USDA, 2025). This means that 16.9% of households went without access to nutritious and safe foods at some time in 2023. Caring about the impact that race has on food insecurity is crucial, as it highlights the systemic inequalities within marginalized communities. To understand this issue and strive for a state with adequate food for all residents, further understanding of the problem is needed.
+Approximately 18 million households experienced food insecurity at some point in 2023, with almost 7 million facing very low food insecurity (USDA, 2025). This makes up 13.5% of the total households in the United States of America, an increase of approximately one million households from 2022. Texas holds the second-highest rate of all states. 16.9% of Texas households face food insecurity in 2023 (USDA, 2025). This means that 16.9% of households went without access to nutritious and safe foods at some time in 2023. Caring about the impact that race has on food insecurity is crucial, as it highlights the systemic inequalities within marginalized communities. To understand this issue and strive for a state with adequate food for all residents, further understanding of the problem is needed. \
 Additionally, studies have shown that access to food is impacted by race (Beaulac et al., 2009). This paper aims to examine the relationship between race and food insecurity in the state of Texas, U.S., using food stamp usage as a proxy measure for food insecurity. The goal is to understand the relationship between these variables and why this phenomenon may occur. By the end of this paper, a better understanding of the overarching topic of racial disparities in food insecurity, specifically in Texas, will be found.
 
 Three research questions guide the analysis in this paper:
-	(1) How do race and food stamp usage vary across Texas counties? <br>
-	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition? <br>
-	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically? <br>
-
+	(1) How do race and food stamp usage vary across Texas counties? \
+\
+	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition? \
+\
+	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically? \
+\
 Our report will cover three primary sections:
 
 ## Descriptive Statistics
@@ -89,7 +91,7 @@ The final analysis section uses OLS regression models to control for confounding
 
   Food insecurity is associated with various structural inequalities, including income disparities, access to capital, and systemic barriers rooted in racism. Several studies revealed that food insecurity is the result of compounding factors that disproportionately affect racialized communities in the United States.
 In a systematic review of studies on food deserts by Beaulac et al. (2009), they concluded that socioeconomic deprivation at the community level intensifies individual-level disparities in the United States. Their review concluded that low-income neighbourhoods that were predominantly African American continuously had fewer supermarkets while experiencing limited geographic access to affordable, healthy food (Beaulac et al., 2009). This structural disadvantage hinders an entire community’s access to nutritious foods, especially in areas dominated by convenience stores that typically offer unhealthy and expensive food items. 
- 
+
   Similarly, Myers and Painter (2017) examined the relationship between race/ethnicity, nativity and food insecurity. They found that Black and Latino households in the United States suffer more than twice as much from food insecurity in comparison to white households, even when accounting for socioeconomic status (Myers & Painter, 2017). Given that minority neighbourhoods have fewer quality supermarkets regardless of socioeconomic status, the authors suggest this gap stems from spatial inequalities. These spatial inequalities indicate that race, independent of income, shapes access to nutritious food. 
 Nam et al. (2015) confirm these findings in their analysis of racial disparities in food insufficiency. In their study, the authors found that Black, Hispanic, and American Indian families experience food insecurity at a statistically significantly higher rate than White families (Nam et al., 2015). When the authors conducted a breakdown of contributing factors, they discovered that this disparity among the minority groups was tied mainly to lower home ownership rates, access to credit, and insufficient financial assets (Nam et al., 2015). These economic disparities increase susceptibility during times of financial hardship, restricting minority families’ ability to protect themselves from food insecurity. 
 Collectively, the research conducted emphasizes that the intersection of race and socioeconomic class creates compounded disadvantages for families of non-White backgrounds. Furthermore, this suggests that food insecurity in the United States, particularly in Texas, is not solely tied to income but several other systemic barriers that are shaped by racial inequality. 
@@ -442,7 +444,7 @@ ggplot(df_race_filter) +
   labs(title = "Gi* Hotspot Analysis of Food Stamp Usage (Null Landscape)")
 ```
 
-## Gi* for Each Race
+### Gi* for Each Race
 ``` {r}
 # Computing Local G for Each Race
 df_race_filter <- df_race_filter %>%
@@ -549,7 +551,7 @@ Among the control variables, every additional $10,000 in median household income
 
 The SEM’s spatial error coefficient is λ = 0.53 (p < 0.001), indicating substantial spatial clustering in the regression errors. This high lambda value justifies our use of the SEM specification. Indeed, the SEM outperforms OLS with a much lower AIC (–26,092 vs. –24,818). 
 
-###Tests for Spatial Indepedence 
+### Tests for Spatial Indepedence 
 
 To confirm that we’ve successfully removed residual spatial autocorrelation in the SEM specification, a Moran’s I test on the residuals was employed.The result of Moran’s I = –0.0396 (p < 0.0001) reveals a slight negative autocorrelation that is highly significant. This demonstrates that the SEM specification has sucsessfully absorbed spatial dependence in the residuals, thus validating the reliability of our regression coefficients. These reslults are illustrated below, with the Morans I test and a map of the spatially indepedent residuals. 
 
@@ -568,43 +570,44 @@ Together, these results reveal a strong relationship between race and food stamp
 
   Throughout the use of different inferential and spatial statistical methods, patterns of food access inequalities within counties of Texas were revealed which brings a closer look to the relationships between race, income, location, and SNAP usage. It is evident that there are clear patterns of spatial autocorrelation which suggest that high food stamp usage is prevalent in the southern areas of Texas. This is shown by the strong clustering pattern portrayed in the map for spatial moving average, thus, supporting the conclusion that the use of food stamps in counties of Texas are not by random. Moreover, various racial groups such as the Black population portray a strong pattern of clustering while others seem to be more dispersed with minimal clusters shown just like the White population. The clustering patterns may suggest that regions with high food stamp usages also have high concentrations of specific racial groups which can lead to structural and system inequalities within the community. It is recommended that additional research is completed to verify the trends and patterns of this study with higher accuracy and precision. Further exploring the relationship between racial groups, SNAP usage, income, and location will help better understand the importance of each variable. Moreover, implementing stronger statistical and analytical methods that are rigorous in value can further support the concluding results. 
 
+\newpage
 # References
 
 <!-- Hanging indent block -->
 <div style="margin-left: 0.5in; text-indent: -0.5in; line-height: 1.5;">
 
-Beaulac, J., Kristjansson, E., & Cummins, S. (2009). A systematic review of food deserts, 1966–2007. *Prevention of Chronic Disease, 6*, A105. https://resolver-scholarsportal-info.libaccess.lib.mcmaster.ca/resolve/15451151/v06i0003/nfp_asrofd1.xml  
-<br><br>
-Coleman-Jensen, A., Rabbitt, M. P., Gregory, C. A., & Singh, A. (2019). *Household Food Security in the United States in 2018 (Economic Research Report Number 270)*. https://doi.org/10.22004/ag.econ.301167  
-<br><br>
-Dean, W. R., & Sharkey, J. R. (2011a). Food insecurity, social capital and perceived personal disparity in a predominantly rural region of Texas: An individual-level analysis. *Social Science & Medicine, 72(9)*, 1454–1462. https://doi.org/10.1016/j.socscimed.2011.03.015  
-<br><br>
-Dean, W. R., & Sharkey, J. R. (2011b). Rural and urban differences in the associations between characteristics of the community food environment and fruit and vegetable intake. *Journal of Nutrition Education and Behavior, 43(6)*, 426–433. https://doi.org/10.1016/j.jneb.2010.07.001  
-<br><br>
-Government of Canada, S. C. (2023, November 14). *Food insecurity among Canadian families*. https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00013-eng.htm  
-<br><br>
-Grummon, A. H., & Taillie, L. S. (2018). Supplemental Nutrition Assistance Program participation and racial/ethnic disparities in food and beverage purchases. *Public Health Nutrition, 21(18)*, 3377–3385. https://doi.org/10.1017/S1368980018002598  
-<br><br>
-Hernandez, D. C., Reesor, L. M., & Murillo, R. (2017). Food insecurity and adult overweight/obesity: Gender and race/ethnic disparities. *Appetite, 117*, 373–378. https://doi.org/10.1016/j.appet.2017.07.010  
-<br><br>
-Janda, K. (2020). *A Geospatial Examination Of The Association Between Geographic Food Access And Food Insecurity In Central Texas: The Role Of Race/Ethnicity And Urbanicity* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/134  
-<br><br>
-Janda, K. M., Ranjit, N., Salvo, D., Hoelscher, D. M., Nielsen, A., Casnovsky, J., & van den Berg, A. (2022). Examining geographic food access, food insecurity, and urbanicity among diverse, low-income participants in Austin, Texas. *International Journal of Environmental Research and Public Health, 19(9)*. https://doi.org/10.3390/ijerph19095108  
-<br><br>
-Lopez-Class, M., & Hosler, A. S. (2010). Assessment of community food resources: A Latino neighborhood study in upstate New York. *Journal of Poverty, 14(4)*, 369–381. https://doi.org/10.1080/10875549.2010.517070  
-<br><br>
-Myers, A. M., & Painter, M. A. (2017). Food insecurity in the United States of America: An examination of race/ethnicity and nativity. *Food Security, 9(6)*, 1419–1432. https://doi.org/10.1007/s12571-017-0733-8  
-<br><br>
-Nam, Y., Huang, J., Heflin, C., & Sherraden, M. (2015). Racial and ethnic disparities in food insufficiency: Evidence from a statewide probability sample. *Journal of the Society for Social Work and Research, 6(2)*, 201–228. https://www.journals.uchicago.edu/doi/10.1086/681574  
-<br><br>
-Odoms-Young, A. M. (2018). Examining the impact of structural racism on food insecurity: Implications for addressing racial/ethnic disparities. *Family & Community Health, 41*(Suppl 2 FOOD INSECURITY AND OBESITY), S3–S6. https://doi.org/10.1097/FCH.0000000000000183  
-<br><br>
-Ramphul, R. (2020). *Using Spatial Methods To Better Understand Food Insecurity And Snap Under-Participation In Texas* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/227  
-<br><br>
-Samuel, L. J., Crews, D. C., Swenor, B. K., et al. (2023). Supplemental Nutrition Assistance Program access and racial disparities in food insecurity. *JAMA Network Open, 6(6)*, e2320196. https://doi.org/10.1001/jamanetworkopen.2023.20196  
-<br><br>
-USDA (2025). Food Security in the U.S. - Key Statistics & Graphics. Available at: https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/key-statistics-graphics#:~:text=13.5%20percent%20(18.0%20million)%20of,(17.0%20million)%20in%202022.
-<br><br>
+Beaulac, J., Kristjansson, E., & Cummins, S. (2009). A systematic review of food deserts, 1966–2007. *Prevention of Chronic Disease, 6*, A105. https://resolver-scholarsportal-info.libaccess.lib.mcmaster.ca/resolve/15451151/v06i0003/nfp_asrofd1.xml \
+\
+Coleman-Jensen, A., Rabbitt, M. P., Gregory, C. A., & Singh, A. (2019). *Household Food Security in the United States in 2018 (Economic Research Report Number 270)*. https://doi.org/10.22004/ag.econ.301167 \
+\
+Dean, W. R., & Sharkey, J. R. (2011a). Food insecurity, social capital and perceived personal disparity in a predominantly rural region of Texas: An individual-level analysis. *Social Science & Medicine, 72(9)*, 1454–1462. https://doi.org/10.1016/j.socscimed.2011.03.015  \
+\
+Dean, W. R., & Sharkey, J. R. (2011b). Rural and urban differences in the associations between characteristics of the community food environment and fruit and vegetable intake. *Journal of Nutrition Education and Behavior, 43(6)*, 426–433. https://doi.org/10.1016/j.jneb.2010.07.001  \
+\
+Government of Canada, S. C. (2023, November 14). *Food insecurity among Canadian families*. https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00013-eng.htm  \
+\
+Grummon, A. H., & Taillie, L. S. (2018). Supplemental Nutrition Assistance Program participation and racial/ethnic disparities in food and beverage purchases. *Public Health Nutrition, 21(18)*, 3377–3385. https://doi.org/10.1017/S1368980018002598  \
+\
+Hernandez, D. C., Reesor, L. M., & Murillo, R. (2017). Food insecurity and adult overweight/obesity: Gender and race/ethnic disparities. *Appetite, 117*, 373–378. https://doi.org/10.1016/j.appet.2017.07.010   \
+\
+Janda, K. (2020). *A Geospatial Examination Of The Association Between Geographic Food Access And Food Insecurity In Central Texas: The Role Of Race/Ethnicity And Urbanicity* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/134  \
+\
+Janda, K. M., Ranjit, N., Salvo, D., Hoelscher, D. M., Nielsen, A., Casnovsky, J., & van den Berg, A. (2022). Examining geographic food access, food insecurity, and urbanicity among diverse, low-income participants in Austin, Texas. *International Journal of Environmental Research and Public Health, 19(9)*. https://doi.org/10.3390/ijerph19095108  \
+\
+Lopez-Class, M., & Hosler, A. S. (2010). Assessment of community food resources: A Latino neighborhood study in upstate New York. *Journal of Poverty, 14(4)*, 369–381. https://doi.org/10.1080/10875549.2010.517070  \
+\
+Myers, A. M., & Painter, M. A. (2017). Food insecurity in the United States of America: An examination of race/ethnicity and nativity. *Food Security, 9(6)*, 1419–1432. https://doi.org/10.1007/s12571-017-0733-8  \
+\
+Nam, Y., Huang, J., Heflin, C., & Sherraden, M. (2015). Racial and ethnic disparities in food insufficiency: Evidence from a statewide probability sample. *Journal of the Society for Social Work and Research, 6(2)*, 201–228. https://www.journals.uchicago.edu/doi/10.1086/681574   \
+\
+Odoms-Young, A. M. (2018). Examining the impact of structural racism on food insecurity: Implications for addressing racial/ethnic disparities. *Family & Community Health, 41*(Suppl 2 FOOD INSECURITY AND OBESITY), S3–S6. https://doi.org/10.1097/FCH.0000000000000183  \
+\
+Ramphul, R. (2020). *Using Spatial Methods To Better Understand Food Insecurity And Snap Under-Participation In Texas* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/227  \
+\
+Samuel, L. J., Crews, D. C., Swenor, B. K., et al. (2023). Supplemental Nutrition Assistance Program access and racial disparities in food insecurity. *JAMA Network Open, 6(6)*, e2320196. https://doi.org/10.1001/jamanetworkopen.2023.20196  \
+\
+USDA (2025). Food Security in the U.S. - Key Statistics & Graphics. Available at: https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/key-statistics-graphics#:~:text=13.5%20percent%20(18.0%20million)%20of,(17.0%20million)%20in%202022.  \
+\
 Walker, R. E., Keane, C. R., & Burke, J. G. (2010). Disparities and access to healthy food in the United States: A review of food deserts literature. *Health & Place, 16(5)*, 876–884. https://doi.org/10.1016/j.healthplace.2010.04.013  
 
 </div>
