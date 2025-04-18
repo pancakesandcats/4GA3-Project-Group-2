@@ -1,7 +1,6 @@
 ---
 title: "Examining the relationship between race and food insecurity in Texas, U.S."
 #subtitle: "A subtitle"
-thanks: "Paper submitted to complete the requirements of ENVSOCTY 4GA3 Applied Spatial Statistics."
 author:
 - name: Amanda Rorat
   student_number: 400437934
