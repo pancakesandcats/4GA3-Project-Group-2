@@ -18,7 +18,7 @@ author:
   student_number: 400307018
   
 subject: "ENVSOCTY 4GA3"
-abstract: "This paper reports an analysis of food insucurity in Texas, USA, and its relationship with race. The analysis was carried out at the level. Data were obtained from the US Census."
+abstract: "This paper reports an analysis of food insecurity in Texas, USA, and its relationship with race. The analysis was carried out at the level. Data were obtained from the US Census."
 keywords: "Food Insecurity, Race, spatial analysis"
 date: "18/04/2025"
 output:
