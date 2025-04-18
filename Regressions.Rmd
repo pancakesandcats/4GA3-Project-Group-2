@@ -152,7 +152,7 @@ ggplot(data = df_race_c, aes(x = non_white_p,
 
 #gwr model 
 
-```{r}
+```{r, eval = FALSE}
 delta <- gwr.sel(
   formula = food_stamp_p ~ other_p + black_p + asian_p + american_indian_p + pacific_islander_p + income + children_p + unemployment_rate,
   data = as(df_race_c, "Spatial"),
@@ -160,7 +160,7 @@ delta <- gwr.sel(
 )
 ```
 
-```{r}
+```{r, eval = FALSE}
 model.gwr <- gwr(formula = food_stamp_p ~ other_p + black_p + asian_p + american_indian_p + pacific_islander_p + income + children_p + unemployment_rate,
                  bandwidth = delta, 
                  data = as(df_race_c, "Spatial"),
@@ -169,7 +169,7 @@ model.gwr
 
 ```
 
-```{r}
+```{r, eval = FALSE}
 df_race_c$beta0 <- model.gwr$SDF@data$X.Intercept.
 df_race_c$beta1 <- model.gwr$SDF@data$white_p
 df_race_c$beta2 <- model.gwr$SDF@data$black_p
@@ -186,7 +186,7 @@ df_race_c$gwr.e <- model.gwr$SDF@data$gwr.e
 
 
 
-```{r}
+```{r, eval = FALSE}
 moran.test(df_race_c$gwr.e, df_race_c.w)
 #still autocorrelation is present 
 ```
@@ -249,7 +249,7 @@ ggsave("sem_r_map.png", plot = map_sem, width = 7, height = 6, dpi = 300)
 ```{r}
 stargazer(model.sem1,
           title = "Spatial Error Model Results",
-          type = "html",
+          type = "latex",
           dep.var.labels = "Food Stamp Usage (% Tract Population)",
           covariate.labels = c("Intercept",
                                "Other Race (%)",
