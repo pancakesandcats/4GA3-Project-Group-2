@@ -66,11 +66,9 @@ Approximately 18 million households experienced food insecurity at some point in
 Additionally, studies have shown that access to food is impacted by race (Beaulac et al., 2009). This paper aims to examine the relationship between race and food insecurity in the state of Texas, U.S., using food stamp usage as a proxy measure for food insecurity. The goal is to understand the relationship between these variables and why this phenomenon may occur. By the end of this paper, a better understanding of the overarching topic of racial disparities in food insecurity, specifically in Texas, will be found.
 
 Three research questions guide the analysis in this paper:
-	(1) How do race and food stamp usage vary across Texas counties?
-
-	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition?
-
-	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically?
+	(1) How do race and food stamp usage vary across Texas counties? <br>
+	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition? <br>
+	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically? <br>
 
 Our report will cover three primary sections:
 
