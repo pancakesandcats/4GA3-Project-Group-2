@@ -34,12 +34,13 @@ always_allow_html: true
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 ```{r}
 install.packages("textreg")
 ```
 
 ```{r load-packages, include=FALSE}
-# devtools::install_github('wpinvestigative/arcos') # Install if needed, but this needs to be done only once
+devtools::install_github('wpinvestigative/arcos') # Install if needed, but this needs to be done only once
 library(cartogram) # Package to create cartograms
 library(readxl) # package to read external data, like csv and text files
 library(sf) # package for working with geospatial data in simple features format
@@ -49,15 +50,12 @@ library(stargazer) # package for creating tables with output of models
 library(tidyverse) # family of packages for data manipulation, analysis, and visualization (includes `ggplot2`)
 library(tigris) # package `tigris` which includes boundary and other geography files for the US:
 library(plotly) # package for interactive plotting
-<<<<<<< HEAD
 library(knitr)
 library(tinytex)
 library(stargazer)
 library(textreg)
-=======
 library(viridis) #Viridis colour scheme for mapping
 library(tidycensus)
->>>>>>> a8479fd411db95683441ab4ab704fa9a22903ad4
 ```
 
 # Introduction
