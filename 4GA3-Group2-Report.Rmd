@@ -550,7 +550,7 @@ Among the control variables, every additional $10,000 in median household income
 
 The SEM’s spatial error coefficient is λ = 0.53 (p < 0.001), indicating substantial spatial clustering in the regression errors. This high lambda value justifies our use of the SEM specification. Indeed, the SEM outperforms OLS with a much lower AIC (–26,092 vs. –24,818). 
 
-###Tests for Spatial Indepedence 
+### Tests for Spatial Indepedence 
 
 To confirm that we’ve successfully removed residual spatial autocorrelation in the SEM specification, a Moran’s I test on the residuals was employed.The result of Moran’s I = –0.0396 (p < 0.0001) reveals a slight negative autocorrelation that is highly significant. This demonstrates that the SEM specification has sucsessfully absorbed spatial dependence in the residuals, thus validating the reliability of our regression coefficients. These reslults are illustrated below, with the Morans I test and a map of the spatially indepedent residuals. 
 
