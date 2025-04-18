@@ -13,7 +13,7 @@ rm(list = ls())
 ```
 
 ```{r, eval = FALSE, message = FALSE}
-pkgs <- c("plotly", "spdep", "spgwr", "leaflet", "spatialreg")
+pkgs <- c("plotly", "spdep", "spgwr", "leaflet", "spatialreg", "stargazer")
 install.packages(pkgs)
 ```
 
@@ -32,6 +32,7 @@ library(spgwr)
 library(leaflet)
 library(RColorBrewer)
 library(spatialreg)
+library(stargazer)
 ```
 
 ```{r}
@@ -107,11 +108,22 @@ map_log
 
 #spatial weights matrix 
 ```{r}
-coords <- st_coordinates(st_centroid(df_race_c))
-nn <- knearneigh(coords, k = 4)
-nb <- knn2nb(nn)
+coords <- CT_centroids <- df_race_c |>
+  st_centroid() |> 
+  st_coordinates()
+
+nb <- knn2nb(knearneigh(coords, k = 4))
 df_race_c.w <- nb2listw(nb, style = "W")
 
+```
+```{r}
+plot(df_race_c |>
+       st_geometry(),
+     border = "gray")
+plot(df_race_c.w, 
+     coords, 
+     col = "red", 
+     add = TRUE)
 ```
 
 ##moran tests 
@@ -173,12 +185,6 @@ df_race_c$gwr.e <- model.gwr$SDF@data$gwr.e
 ```
 
 
-```{r}
-ggplot(data = df_race_c, aes(fill = beta2)) + 
-  geom_sf(color = "white") +
-  scale_fill_distiller(palette = "YlOrRd", trans = "reverse")
-```
-
 
 ```{r}
 moran.test(df_race_c$gwr.e, df_race_c.w)
@@ -202,23 +208,61 @@ summary(model.sem1)
 ```
 
 ```{r}
-moran.test(model.sem1$residuals, df_race_c.w, alternative = "less")
+morans_result <- moran.test(model.sem1$residuals, df_race_c.w, alternative = "less")
+
+formatted_p <- format(morans_result$p.value, digits = 3)
+
+summary_text <- paste0(
+  "Moran's I = ", round(morans_result$estimate["Moran I statistic"], 4),
+  ", p-value = ", formatted_p
+)
+writeLines(summary_text, "morans_summary.txt")
 ```
+
 ```{r}
 df_race_c$r_sem <- residuals(model.sem1)
 ```
 
 ```{r}
-map_sem <- plot_ly(df_race_c) |> 
-
-  add_sf(type = "scatter",
-         color = ~(r_sem > 0), 
-         colors = c("red", 
-                    "dodgerblue4")) 
+map_sem <-ggplot(df_race_c) +
+  geom_sf(aes(fill = r_sem > 0), color = "white", size = 0.2) +
+  scale_fill_manual(
+    values = c("FALSE" = "#2166ac", "TRUE" = "#b2182b"),
+    name = "Residual > 0",
+    labels = c("No", "Yes")
+  ) +
+  labs(
+    title = "SEM Residuals",
+    fill = "Residual > 0"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
+  )
+ggsave("sem_r_map.png", plot = map_sem, width = 7, height = 6, dpi = 300)
 ```
+
+#Save results for display 
 
 ```{r}
-map_sem
+stargazer(model.sem1,
+          title = "Spatial Error Model Results",
+          type = "html",
+          dep.var.labels = "Food Stamp Usage (% Tract Population)",
+          covariate.labels = c("Intercept",
+                               "Other Race (%)",
+                               "Black (%)",
+                               "Asian (%)",
+                               "American Indian (%)",
+                               "Pacific Islander (%)",
+                               "Median Household Income",
+                               "Households with Children (%)",
+                               "Unemployment Rate (%)"),
+          notes = "Significance levels: *p < 0.1; **p < 0.05; ***p < 0.01",
+          notes.append = TRUE,
+          star.cutoffs = c(0.1, 0.05, 0.01),
+          out = "sem_results.html")
 ```
-
 
