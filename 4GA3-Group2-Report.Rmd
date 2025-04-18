@@ -6,8 +6,6 @@ author:
   student_number: 400437934
 - name: Emma Bilbija
   student_number: 400310926
-- name: Jules Ciulpan
-  student_number: 400134919
 - name: Mackenzie St. Arnault
   student_number: 400373298
 - name: Nicole Santos
@@ -91,7 +89,8 @@ Grummon and Taillie (2018) found that even with SNAP participation, there are st
 
 # Study area
 
-Insert Text here
+  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. There are many studies conducted in Texas that detail the relationship between food insecurity and other variables. In a study by Beaulac et al. (2009), it was found that food access in the U.S. is significantly impacted by both income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them.
+
 
 ```{r, include=FALSE}
 options(tigris_use_cache = TRUE)
