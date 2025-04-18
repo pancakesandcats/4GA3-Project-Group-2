@@ -206,6 +206,14 @@ model.sem1 <- errorsarlm(
 
 summary(model.sem1)
 ```
+```{r}
+model <- readRDS("model.sem1.rds")
+```
+
+
+```{r}
+model.sem1_summary <- summary(model)
+```
 
 ```{r}
 morans_result <- moran.test(model.sem1$residuals, df_race_c.w, alternative = "less")
@@ -263,6 +271,10 @@ stargazer(model.sem1,
           notes = "Significance levels: *p < 0.1; **p < 0.05; ***p < 0.01",
           notes.append = TRUE,
           star.cutoffs = c(0.1, 0.05, 0.01),
-          out = "sem_results.html")
+          out = "sem_results.latex")
 ```
+
+
+\input{sem_results.latex}
+
 

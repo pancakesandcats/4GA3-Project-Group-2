@@ -1,8 +1,16 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Project Written Sections
 
 #Introduction
 
 # Background 
+```{r}
+library(knitr)
+```
 
 ## Defining Food Insecurity
 
@@ -73,10 +81,6 @@ A geographically weighted regression (GWR) model with Gaussian weighting was the
 To explicitly account for residual spatial dependence, a Spatial Error Model (SEM) was estimated. This method accounts for spatial autocorrelation by incorporating a function of the spatially dependent residuals within the error term. A Moran’s I test confirmed spatial independence of the SEM residuals, indicating the validity of the estimates. 
 
 
-```{r}
-knitr::include_graphics("sem_plot.png")
-```
-
 ```{r include_txt, echo=FALSE, results='asis'}
 cat(readLines("morans_summary.txt"), sep = "\n")
 ```
@@ -98,6 +102,11 @@ Together, these results reveal a strong relationship between race and food stamp
 
 
 
+```{r, results='asis', echo = FALSE}
+cat(readLines("morans_i_test_output.txt"), sep = "\n")
+```
+
+![Sem Map Res](sem_r_map.png)
 
 
 
