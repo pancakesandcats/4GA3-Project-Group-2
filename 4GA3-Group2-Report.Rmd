@@ -28,13 +28,11 @@ output:
     # http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/
     # https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-ms.tex
     template: project-template-default.tex
-bibliography: [bibliography.bib, packages.bib]
 always_allow_html: true
 ---
 
 ```{r load-packages, include=FALSE}
 # devtools::install_github('wpinvestigative/arcos') # Install if needed, but this needs to be done only once
-library(arcos) # the `arcos` allows us to download Prescription data prepared by the Washington Post
 library(cartogram) # Package to create cartograms
 library(readxl) # package to read external data, like csv and text files
 library(sf) # package for working with geospatial data in simple features format
