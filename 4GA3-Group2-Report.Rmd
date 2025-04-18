@@ -6,8 +6,6 @@ author:
   student_number: 400437934
 - name: Emma Bilbija
   student_number: 400310926
-- name: Jules Ciulpan
-  student_number: 400134919
 - name: Mackenzie St. Arnault
   student_number: 400373298
 - name: Nicole Santos
@@ -27,6 +25,9 @@ output:
     # http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/
     # https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-ms.tex
     template: project-template-default.tex
+    toc: true
+    toc_depth: 3
+    number_sections: true
 always_allow_html: true
 ---
 
@@ -48,21 +49,45 @@ library(stargazer) # package for creating tables with output of models
 library(tidyverse) # family of packages for data manipulation, analysis, and visualization (includes `ggplot2`)
 library(tigris) # package `tigris` which includes boundary and other geography files for the US:
 library(plotly) # package for interactive plotting
+<<<<<<< HEAD
 library(knitr)
 library(tinytex)
 library(stargazer)
 library(textreg)
+=======
+library(viridis) #Viridis colour scheme for mapping
+library(tidycensus)
+>>>>>>> a8479fd411db95683441ab4ab704fa9a22903ad4
 ```
 
 # Introduction
 
-Insert here
+Approximately 18 million households experienced food insecurity at some point in 2023, with almost 7 million facing very low food insecurity (USDA, 2025). This makes up 13.5% of the total households in the United States of America, an increase of approximately one million households from 2022. Texas holds the second-highest rate of all states. 16.9% of Texas households face food insecurity in 2023 (USDA, 2025). This means that 16.9% of households went without access to nutritious and safe foods at some time in 2023. Caring about the impact that race has on food insecurity is crucial, as it highlights the systemic inequalities within marginalized communities. To understand this issue and strive for a state with adequate food for all residents, further understanding of the problem is needed.
+Additionally, studies have shown that access to food is impacted by race (Beaulac et al., 2009). This paper aims to examine the relationship between race and food insecurity in the state of Texas, U.S., using food stamp usage as a proxy measure for food insecurity. The goal is to understand the relationship between these variables and why this phenomenon may occur. By the end of this paper, a better understanding of the overarching topic of racial disparities in food insecurity, specifically in Texas, will be found.
+
+Three research questions guide the analysis in this paper:
+	(1) How do race and food stamp usage vary across Texas counties?
+
+	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition?
+
+	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically?
+
+Our report will cover three primary sections:
+
+## Descriptive Statistics
+The first section of analysis will analyze the basic patterns of race and food stamp usage, calculating descriptive statistics for both variables to address the first research question. The results of this section are summarized in tables of descriptive statistics. Choropleth maps are used to visualize the spatial trends in this data. This section identifies the baseline geographic patterns of food insecurity and racial composition.
+
+## Spatial Statistics
+Next, to address research question two, food insecurity and racial composition will be tested to identify any clustering or distribution. These are methods of spatial autocorrelation. Food stamp usage hotspots are tested for overlap with clusters of certain racial groups. 
+
+## Inferential Statistics (Research Question 3) 
+The final analysis section uses OLS regression models to control for confounding variables such as income or education. Regression analysis will reveal the extent to which race plays a role in predicting food insecurity, independent of any possible confounders. Methods of geographically weighted regression models are used to better understand the role of geography in shaping this relationship.
 
 # Background
 
 ## Defining Food Insecurity
 
-	Food insecurity refers to the lack of reliable access to sufficient, nutritious food which encompasses four dimensions: availability, access, stability and utilization (Uppal, 2023). Insecure household may face difficulties in acquiring food, affording nutritious meals or maintain stable access due to infrastructure or economic disruption. According to the USDA, food insecurity can range from limited dietary variety and quality to severe disruptions like insufficient food intake (Coleman-Jensen et al., 2019). Beyond nutritional concerns, it is closely linked to a higher likelihood of chronic illnesses, mental health issues, frequent hospital visits and even mortality (Uppal, 2023). In 2018, around 11.1% of households in the United States, over 14 million, struggle with food insecurity, including 4.3% that experienced very low food security (Coleman-Jensen et al., 2019). On a global scale, rates of food insecurity have been increasing, driven by factors of inflation, economic uncertainty, and systemic inequalities. While these national statistics are alarming, Texas often exceeds national averages, particularly in marginalized and rural areas. In 2020-2022, 15.5% of households were food insecure, exceeding the national average of 12.8% (USDA ERS, 2023). Therefore, highlighting its urgency as a case study for deeper spatial and racial food access disparities (Dean & Sharkey, 20100; Janda et al., 2022). The complex and multifaceted nature of food insecurity calls for both large-scale policy reforms and locally tailored, community-driven strategies.
+  Food insecurity refers to the lack of reliable access to sufficient, nutritious food which encompasses four dimensions: availability, access, stability and utilization (Uppal, 2023). Insecure household may face difficulties in acquiring food, affording nutritious meals or maintain stable access due to infrastructure or economic disruption. According to the USDA, food insecurity can range from limited dietary variety and quality to severe disruptions like insufficient food intake (Coleman-Jensen et al., 2019). Beyond nutritional concerns, it is closely linked to a higher likelihood of chronic illnesses, mental health issues, frequent hospital visits and even mortality (Uppal, 2023). In 2018, around 11.1% of households in the United States, over 14 million, struggle with food insecurity, including 4.3% that experienced very low food security (Coleman-Jensen et al., 2019). On a global scale, rates of food insecurity have been increasing, driven by factors of inflation, economic uncertainty, and systemic inequalities. While these national statistics are alarming, Texas often exceeds national averages, particularly in marginalized and rural areas. In 2020-2022, 15.5% of households were food insecure, exceeding the national average of 12.8% (USDA ERS, 2023). Therefore, highlighting its urgency as a case study for deeper spatial and racial food access disparities (Dean & Sharkey, 20100; Janda et al., 2022). The complex and multifaceted nature of food insecurity calls for both large-scale policy reforms and locally tailored, community-driven strategies.
 	
 ## Structural Causes of Food Insecurity
 
@@ -100,40 +125,58 @@ Grummon and Taillie (2018) found that even with SNAP participation, there are st
 
 # Study area
 
-Insert Text here
+  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. Many studies conducted in Texas have detailed the relationship between food insecurity and other variables. A study by Beaulac et al. (2009) found that food access in the U.S. is significantly impacted by income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them.
 
-Insert geography here
+```{r, include=FALSE}
+options(tigris_use_cache = TRUE)
+
+tx_tracts <- get_decennial(geography = "tract",
+                           variables = "H1_001N",
+                           state = "Texas",
+                           year = 2020,
+                           geometry = TRUE
+)
+```
+
+```{r, echo=FALSE}
+ggplot() +
+  geom_sf(data = tx_tracts,
+          fill = "lightgrey") +
+  theme_bw()
+```
 
 # Data
 
-The data used for the project primarily comes from the U.S. Census Bureau. This data can easily be imported into R using the “tidycensus” package. Additionally, the “tidyverse” package will be used since it contains key libraries such as “ggplot2” which will allow us to plot the census data for each county within Texas, making any spatial patterns easily identifiable. The full list of packages included within the tidyverse is available on their website. The “sf” package for Simple Features will also be imported to make spatial data easier to create and visualize. Likewise, we will use packages such as “gt” and “kableExtra” to create clean looking tables. 
+  The data used for the project primarily comes from the U.S. Census Bureau. This data can easily be imported into R using the “tidycensus” package. Additionally, the “tidyverse” package will be used since it contains key libraries such as “ggplot2” which will allow us to plot the census data for each county within Texas, making any spatial patterns easily identifiable. The full list of packages included within the tidyverse is available on their website. The “sf” package for Simple Features will also be imported to make spatial data easier to create and visualize. Likewise, we will use packages such as “gt” and “kableExtra” to create clean looking tables. 
 
-Listed below are the U.S. Census Bureau variables used with their respective R codes (that allow us to import the data directly into R through the tidycensus package). The data used will be from 2023 which is the most recent year in which the data is available in R.
+  Listed below are the U.S. Census Bureau variables used with their respective R codes (that allow us to import the data directly into R through the tidycensus package). The data used will be from 2023 which is the most recent year in which the data is available in R.
 
-Insert table
+```{r}
+data <- data.frame(
+  Name = c("Food stamp count", "Total population", "White population", "Black population", "Asian population", "American Indian and Alaska Native population", "Native Hawaiian or other pacific islander population", "Latino population", "Grocery store count", "Median income in the past 12 months"),
+  "R_Code" = c("B22003_002", "B01003_001", "B02001_002", "B02001_003", "B02001_005", "B02001_004", "B02001_006", "B03002_012", "B24134_112", "B06011_001"),
+  "Additional_Notes" = c("
+Not converted into per capita, will be done using the population variables.", "", "", "", "", "", "", "", "", "Used as a control variable."))
+```
 
-The food stamp count is crucial to use to identify food security or insecurity in each county, as that is the most relevant quantitative data relating to food security that we could find. By converting food stamp usage to per capita rates (using the population for each county), the similarities and/or differences in food stamp usage (and consequently, food security/insecurity) can be mapped using ggplot2. This can then be compared to racial demographics (mapped by comparing the white, black, Asian, American Indian and to see if there is a potential correlation between race and food insecurity/food stamp usage.
+  The food stamp count is crucial to use to identify food security or insecurity in each county, as that is the most relevant quantitative data relating to food security that we could find. By converting food stamp usage to per capita rates (using the population for each county), the similarities and/or differences in food stamp usage (and consequently, food security/insecurity) can be mapped using ggplot2. This can then be compared to racial demographics (mapped by comparing the white, black, Asian, American Indian and to see if there is a potential correlation between race and food insecurity/food stamp usage.
 
 # Methods
 
-## Methods for Descriptive Statistics
+## Methods for Descriptive & Spatial Statistics 
+  County-level data on food stamp usage and race in Texas were analyzed using the df_race.rds shapefile. This shapefile included variables such as the percentage of residents receiving food stamps and racial composition. It was imported into R and reprojected using st_transform() to EPSG:3857 to ensure accurate distance-based and spatial relationship calculations.
 
-insert here
-
-## Methods for Spatial Statistics 
-County-level data on food stamp usage and race in Texas were analyzed using the df_race.rds shapefile. This shapefile included variables such as the percentage of residents receiving food stamps and racial composition. It was imported into R and reprojected using st_transform() to EPSG:3857 to ensure accurate distance-based and spatial relationship calculations.
-
-To visualize the geographic distribution of food stamp usage, an initial choropleth map was created using ggplot() and geom_sf(), with the variable food_stamp_p representing the percentage of food stamp recipients in each county. The scale_fill_viridis_c() was used to apply a colour gradient that improves interpretability for viewers by emphasizing variation in values. Prior to analysis, counties with missing values were excluded using filter(!is.na(food_stamp_p)) to prevent skewed results and ensure clean spatial computations.
+  To visualize the geographic distribution of food stamp usage, an initial choropleth map was created using ggplot() and geom_sf(), with the variable food_stamp_p representing the percentage of food stamp recipients in each county. The scale_fill_viridis_c() was used to apply a colour gradient that improves interpretability for viewers by emphasizing variation in values. Prior to analysis, counties with missing values were excluded using filter(!is.na(food_stamp_p)) to prevent skewed results and ensure clean spatial computations.
 	
-To analyze local spatial interactions, a neighbourhood structure was established using Queen contiguity through the poly2nb() function, which identifies counties as neighbours if they share a boundary or a corner point. This structure was then transformed into a spatial weights matrix using nb2listw(), allowing the influence of neighbouring counties to be incorporated into subsequent spatial analyses.
+  To analyze local spatial interactions, a neighbourhood structure was established using Queen contiguity through the poly2nb() function, which identifies counties as neighbours if they share a boundary or a corner point. This structure was then transformed into a spatial weights matrix using nb2listw(), allowing the influence of neighbouring counties to be incorporated into subsequent spatial analyses.
 
-Spatial moving averages (SMAs) were computed using lag.listw() for key variables such as food stamp usage (sma_food_stamp_p) and racial proportions (e.g., sma_white_p, sma_black_p, sma_asian_p, sma_american_indian_p, sma_pacific_islander_p, sma_other_p). SMAs provide a smoothed view of regional patterns by averaging the values of surrounding counties instead of the raw data. This approach emphasizes clusters of consistent low or high values, making the broader spatial trend easy to identify. 
+  Spatial moving averages (SMAs) were computed using lag.listw() for key variables such as food stamp usage (sma_food_stamp_p) and racial proportions (e.g., sma_white_p, sma_black_p, sma_asian_p, sma_american_indian_p, sma_pacific_islander_p, sma_other_p). SMAs provide a smoothed view of regional patterns by averaging the values of surrounding counties instead of the raw data. This approach emphasizes clusters of consistent low or high values, making the broader spatial trend easy to identify. 
 
-A null simulation envelope was generated to assess whether observed spatial patterns were stronger than would be expected under random distribution. It involved randomizing the food stamp usage values using a sample (food_stamp_p) and recalculating the SMA of the randomized data. Therefore, it created a baseline scenario representing spatial randomness, allowing for visual and statistical comparison with the actual SMA pattern. The difference between the observed and randomized results offers insight into the presence and strength of spatial autocorrelation within the data. 
+  A null simulation envelope was generated to assess whether observed spatial patterns were stronger than would be expected under random distribution. It involved randomizing the food stamp usage values using a sample (food_stamp_p) and recalculating the SMA of the randomized data. Therefore, it created a baseline scenario representing spatial randomness, allowing for visual and statistical comparison with the actual SMA pattern. The difference between the observed and randomized results offers insight into the presence and strength of spatial autocorrelation within the data. 
 
-The local Gi* statistic (Local G) was computed using localG() from the spdep package to identify areas of statistically significant clustering. This technique evaluates each county’s value relative to the average of its neighbouring counties and generates a Z-score. This Z-score determines whether it belongs to a statistically significant high-value cluster (hotspot) or a low-value cluster (coldspot). The analysis was applied to food stamp usage and racial proportion to explore the spatial overlap between race and food insecurity. The resulting Gi* values were incorporated using mutate() and converted to numeric format using as.numeric() to enable plotting. Since localG() outputs a specialized object class, converting the results to numeric format was required to ensure compatibility with ggplot() for mapping and visualization.
+  The local Gi* statistic (Local G) was computed using localG() from the spdep package to identify areas of statistically significant clustering. This technique evaluates each county’s value relative to the average of its neighbouring counties and generates a Z-score. This Z-score determines whether it belongs to a statistically significant high-value cluster (hotspot) or a low-value cluster (coldspot). The analysis was applied to food stamp usage and racial proportion to explore the spatial overlap between race and food insecurity. The resulting Gi* values were incorporated using mutate() and converted to numeric format using as.numeric() to enable plotting. Since localG() outputs a specialized object class, converting the results to numeric format was required to ensure compatibility with ggplot() for mapping and visualization.
 	
-Lastly, maps were generated to visualize the Gi* Z-scores using ggplot() and scale_fill_gradient2(), with a midpoint of zero. Red tones indicated statistically significant hotspots (high-value clusters), blue/green tones indicated coldspots (low-value clusters), and yellow areas represented neutral or non-significant regions. This mapping approach successfully highlighted clusters of food insecurity and racial distribution, offering a spatial perspective for understanding systemic disparities among the counties in Texas. 
+  Lastly, maps were generated to visualize the Gi* Z-scores using ggplot() and scale_fill_gradient2(), with a midpoint of zero. Red tones indicated statistically significant hotspots (high-value clusters), blue/green tones indicated coldspots (low-value clusters), and yellow areas represented neutral or non-significant regions. This mapping approach successfully highlighted clusters of food insecurity and racial distribution, offering a spatial perspective for understanding systemic disparities among the counties in Texas. 
 	
 ## Methods for Regression Analysis 
 Regression models were estimated using tract-level data on per-capita food stamp usage, racial composition, and several control variables, including unemployment rate, median household income, and per-capita households with children.
@@ -195,13 +238,15 @@ insert here
 
 ## Additional Methods
 
+insert here
+
 # Analysis
 
 insert here
 
 # Conclusions and Recommendations
 
-Throughout the use of different inferential and spatial statistical methods, patterns of food access inequalities within counties of Texas were revealed which brings a closer look to the relationships between race, income, location, and SNAP usage. It is evident that there are clear patterns of spatial autocorrelation which suggest that high food stamp usage is prevalent in the southern areas of Texas. This is shown by the strong clustering pattern portrayed in the map for spatial moving average, thus, supporting the conclusion that the use of food stamps in counties of Texas are not by random. Moreover, various racial groups such as the Black population portray a strong pattern of clustering while others seem to be more dispersed with minimal clusters shown just like the White population. The clustering patterns may suggest that regions with high food stamp usages also have high concentrations of specific racial groups which can lead to structural and system inequalities within the community. It is recommended that additional research is completed to verify the trends and patterns of this study with higher accuracy and precision. Further exploring the relationship between racial groups, SNAP usage, income, and location will help better understand the importance of each variable. Moreover, implementing stronger statistical and analytical methods that are rigorous in value can further support the concluding results. 
+  Throughout the use of different inferential and spatial statistical methods, patterns of food access inequalities within counties of Texas were revealed which brings a closer look to the relationships between race, income, location, and SNAP usage. It is evident that there are clear patterns of spatial autocorrelation which suggest that high food stamp usage is prevalent in the southern areas of Texas. This is shown by the strong clustering pattern portrayed in the map for spatial moving average, thus, supporting the conclusion that the use of food stamps in counties of Texas are not by random. Moreover, various racial groups such as the Black population portray a strong pattern of clustering while others seem to be more dispersed with minimal clusters shown just like the White population. The clustering patterns may suggest that regions with high food stamp usages also have high concentrations of specific racial groups which can lead to structural and system inequalities within the community. It is recommended that additional research is completed to verify the trends and patterns of this study with higher accuracy and precision. Further exploring the relationship between racial groups, SNAP usage, income, and location will help better understand the importance of each variable. Moreover, implementing stronger statistical and analytical methods that are rigorous in value can further support the concluding results. 
 
 # References
 
@@ -237,6 +282,8 @@ Odoms-Young, A. M. (2018). Examining the impact of structural racism on food ins
 Ramphul, R. (2020). *Using Spatial Methods To Better Understand Food Insecurity And Snap Under-Participation In Texas* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/227  
 <br><br>
 Samuel, L. J., Crews, D. C., Swenor, B. K., et al. (2023). Supplemental Nutrition Assistance Program access and racial disparities in food insecurity. *JAMA Network Open, 6(6)*, e2320196. https://doi.org/10.1001/jamanetworkopen.2023.20196  
+<br><br>
+USDA (2025). Food Security in the U.S. - Key Statistics & Graphics. Available at: https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/key-statistics-graphics#:~:text=13.5%20percent%20(18.0%20million)%20of,(17.0%20million)%20in%202022.
 <br><br>
 Walker, R. E., Keane, C. R., & Burke, J. G. (2010). Disparities and access to healthy food in the United States: A review of food deserts literature. *Health & Place, 16(5)*, 876–884. https://doi.org/10.1016/j.healthplace.2010.04.013  
 
