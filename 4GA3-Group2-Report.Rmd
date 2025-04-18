@@ -42,6 +42,7 @@ library(tidyverse) # family of packages for data manipulation, analysis, and vis
 library(tigris) # package `tigris` which includes boundary and other geography files for the US:
 library(plotly) # package for interactive plotting
 library(viridis) #Viridis colour scheme for mapping
+library(tidycensus)
 ```
 
 # Introduction
@@ -92,7 +93,23 @@ Grummon and Taillie (2018) found that even with SNAP participation, there are st
 
 Insert Text here
 
-Insert geography here
+```{r, include=FALSE}
+options(tigris_use_cache = TRUE)
+
+tx_tracts <- get_decennial(geography = "tract",
+                           variables = "H1_001N",
+                           state = "Texas",
+                           year = 2020,
+                           geometry = TRUE
+)
+```
+
+```{r, echo=FALSE}
+ggplot() +
+  geom_sf(data = tx_tracts,
+          fill = "lightgrey") +
+  theme_bw()
+```
 
 # Data
 

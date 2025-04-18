@@ -6,6 +6,8 @@ output: html_notebook
 ```{r}
 library(sf)
 library(cartogram)
+library(tigris)
+library(tidyver)
 ```
 
 
@@ -16,6 +18,25 @@ Define racial diversity:
 
 
 # Choropleths
+
+```{r}
+options(tigris_use_cache = TRUE)
+
+tx_tracts <- get_decennial(geography = "tract",
+                           variables = "H1_001N",
+                           state = "Texas",
+                           year = 2020,
+                           geometry = TRUE
+)
+```
+
+```{r}
+ggplot() +
+  geom_sf(data = tx_tracts,
+          fill = "lightgrey") +
+  theme_bw()
+```
+
 
 (load df_race.rds)
 
