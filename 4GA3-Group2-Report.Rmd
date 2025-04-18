@@ -17,6 +17,7 @@ author:
   student_number: 200008359
 - name: Thea Chu
   student_number: 400307018
+  
 subject: "ENVSOCTY 4GA3"
 abstract: "This paper reports an analysis of food insucurity in Texas, USA, and its relationship with race. The analysis was carried out at the level. Data were obtained from the US Census."
 keywords: "Food Insecurity, Race, spatial analysis"
@@ -71,15 +72,44 @@ Opioid use has increased over the years, particularly with the introduction of t
 
 # Background
 
-Drug overdose is one of the leading causes of accidental death; causing 65,000 deaths in the United States in 2016 [@jones2018opioid]. The United States is currently experiencing a lethal health crisis of drug use, specifically, opioid overdose and opioid use disorder/misuse [@national2017pain]. The use of opioids causes feelings of euphoria and is most widely used for pain relief. Using opioids (including prescription use) can increase tolerance to the drug effect, as well as physical dependency such as withdrawal symptoms [@van1999opioids]. According to the WHO (2018), opioids can cause substance reliance that is described by a powerful urge to take opioids, and steady opioid use despite destructive consequences, respiratory depression, and behaviours. Opioids are separated into prescription pain relievers such as oxycodone and hydrocodone, and illicit substances including heroin. According to @jones2018opioid, Americans are responsible for 80 percent of the world’s oxycodone and 90 percent of the world’s hydrocodone consumption. On average, 90 Americans die each day prematurely from an overdose that involves an opioid [@national2017pain]. The biggest increase in drug overdose deaths occurred between 2015 and 2016, involving synthetic opioids, and most significantly, fentanyl [@scholl2019drug]. From 2018 to 2019, The Washington Post (2020) reported on fentanyl, which killed more than 30,000 people that year. If current trends continue, the yearly death toll from fentanyl will converge to the yearly toll from traffic and gun accidents (The Washington Post, 2020).
+## Defining Food Insecurity
 
-In 2011, Kentucky was flooded with 371 million doses of opioid painkillers forcing state officials to crack down on pain clinics, suing pharmaceutical companies and limiting the number of pills doctors are able to prescribe [@beam2018kentucky]. Such measures lead to almost 100 million fewer opioid prescriptions in 2017, however, to an 11.5 percent increase in drug overdose deaths [@beam2018kentucky]. According to the Kentucky Injury Prevention and Research Center (2012), deaths from drug-overdose in Kentucky increased 282 percent between 2000 and 2010, from a rate of six overdose deaths per 100,000 residents to 22.9 deaths per 100,000 residents.
+	Food insecurity refers to the lack of reliable access to sufficient, nutritious food which encompasses four dimensions: availability, access, stability and utilization (Uppal, 2023). Insecure household may face difficulties in acquiring food, affording nutritious meals or maintain stable access due to infrastructure or economic disruption. According to the USDA, food insecurity can range from limited dietary variety and quality to severe disruptions like insufficient food intake (Coleman-Jensen et al., 2019). Beyond nutritional concerns, it is closely linked to a higher likelihood of chronic illnesses, mental health issues, frequent hospital visits and even mortality (Uppal, 2023). In 2018, around 11.1% of households in the United States, over 14 million, struggle with food insecurity, including 4.3% that experienced very low food security (Coleman-Jensen et al., 2019). On a global scale, rates of food insecurity have been increasing, driven by factors like inflation, economic uncertainty, and systemic inequalities. While these national statistics are alarming, Texas often exceeds national averages, particularly in marginalized and rural areas. In 2020-2022, 15.5% of households were food insecure, exceeding the national average of 12.8% (USDA ERS, 2023). Therefore, highlighting its urgency as a case study for deeper spatial and racial food access disparities (Dean & Sharkey, 20100; Janda et al., 2022). The complex and multifaceted nature of food insecurity calls for both large-scale policy reforms and locally tailored, community-driven strategies.
+	
+## Structural Causes of Food Insecurity
 
-In 2006, Kentucky had the third-highest rate of prescription opioids in the US, but over the course of the decade, those numbers have dropped [@kennedy2020cdc]. Kentucky, however, is still one of the top ten states with the highest prescription rates [@nida2019kentucky]. 
+Food insecurity is associated with various structural inequalities, including income disparities, access to capital, and systemic barriers rooted in racism. Several studies revealed that food insecurity is the result of compounding factors that disproportionately affect racialized communities in the United States.
+ In a systematic review of studies on food deserts by Beaulac et al. (2009), they concluded that socioeconomic deprivation at the community level intensifies individual-level disparities in the United States. Their review concluded that low-income neighbourhoods that were predominantly African American continuously had fewer supermarkets while experiencing limited geographic access to affordable, healthy food (Beaulac et al., 2009). This structural disadvantage hinders an entire community’s access to nutritious foods, especially in areas dominated by convenience stores that typically offer unhealthy and expensive food items. 
+ 
+  Similarly, Myers and Painter (2017) examined the relationship between race/ethnicity, nativity and food insecurity. They found that Black and Latino households in the United States suffer more than twice as much from food insecurity in comparison to white households, even when accounting for socioeconomic status (Myers & Painter, 2017). Given that minority neighbourhoods have fewer quality supermarkets regardless of socioeconomic status, the authors suggest this gap stems from spatial inequalities. These spatial inequalities indicate that race, independent of income, shapes access to nutritious food. 
+Nam et al. (2015) confirm these findings in their analysis of racial disparities in food insufficiency. In their study, the authors found that Black, Hispanic, and American Indian families experience food insecurity at a statistically significantly higher rate than White families (Nam et al., 2015). When the authors conducted a breakdown of contributing factors, they discovered that this disparity among the minority groups was tied mainly to lower homeownership rates, access to credit, and insufficient financial assets (Nam et al., 2015). These economic disparities increase susceptibility during times of financial hardship, restricting minority families’ ability to protect themselves from food insecurity. 
+Collectively, the research conducted emphasizes that the intersection of race and socioeconomic class creates compounded disadvantages for families of non-White backgrounds. Furthermore, this suggests that food insecurity in the United States, particularly in Texas, is not solely tied to income but several other systemic barriers that are shaped by racial inequality. 
 
-Many recent studies have been researching the socioeconomic factors contributing to the rates of opioid use worldwide. For instance, disability, pension, unemployment, divorce, low income and low education are associated with persistent opioid use, based on a Norwegian study from 2005 [@svendsen2014persistent].
+## Race, Place, and Access
 
-According to @altekruse2020socioeconomic, people whose highest level of education was a High School Diploma or GED accounted to 35.4 percent of deaths related to opioid overdose, while 23.7 percent of opioid overdose deaths were of people who did not complete high school. Over the years the number of deaths due to opioid overdose had increased for people with less than a four-year college degree in comparison to those with graduate degrees (Altekruse et al., 2020). Such an increase in the risk of opioid misuse among people with lower education may partially reflect downstream consequences such as less access to stable employment opportunities [@altekruse2020socioeconomic]. In another study, @irp2018opioid suggests that less-educated individuals may have greater risk factors and fewer disincentives for engaging in drug use as opposed to more educated individuals. This implies that less-educated individuals face poor job prospects, declining or flat earnings, and greater risk of workplace injuries, chronic health conditions and disability, which in a lot of cases lead to opioid prescriptions  [@irp2018opioid]. According to @smolina2016determinants, the rapid increase in opioid consumption (by 31 percent) in British Columbia was found to be the greatest among lower-income individuals compared to higher-income individuals, from 2005 to 2013.
+T exas food insecurity is deeply shaped by spatial and racial inequalities in food access. In rural Central Texas, residents often face limited access to supermarkets and healthy food outlets, typically traveling long distances for groceries and relying on nearby convenience stores with fewer nutritious options. This geographic isolation, coupled with underdeveloped infrastructure and lack of public transportation, contributes to higher food prices and limited dietary quality compared to urban areas (Dean & Sharkey, n.d.; Dean & Sharkey, 2011). Janda et al. (2022) further support these findings, examining food insecurities across different geographic contexts in Travis County. They found that individuals living in rural zip codes were more than twice as likely to experience food insecurities compared to those in urban areas. This remains significant even after controlling for factors like income, educational level, employment status and access to transportation (Janda et al., 2022). Additionally, Janda’s 2020 dissertation research documented rural and peri-urban callers to the 2-1-1 helpline in Central Texas. The finding shows that these areas were significantly more likely to seek help with food assistance. This was true for individuals living in zip codes that lacked supermarkets, emphasizing the role that geographic proximity plays in shaping spatial disparities in food access.
+
+  Race and geography shape disparities in food insecurity across Texas. The Supplemental Nutrition Assistance Program (SNAP), formerly known as food stamps, was established to combat food insecurity among low-income populations providing assistance to purchase food.Yet disparities persist even among SNAP-eligible households. Samuel et al. (2023) found that across the United States, SNAP-eligible Black and multiracial households experience higher rates of food insecurities compared to White counterparts. This disparity was especially evident among those who were not enrolled in the program. Among households not participating in SNAP, those that identify entirely Black were 52% more likely to experience food insecurity compared to White households. Similarly, multiracial households faced a 42% higher risk of food insecurity than their White counterparts. Importantly, among households actively participating in SNAP, the racial disparities in food insecurity were no longer observed. This suggests that while food assistance programs can help reduce the effects of structural inequalities, it does not entirely eliminate them (Samuel et al., 2023). In Central Texas, Janda et al. (2022) reported that Hispanic participants had 2.79 times greater odds of being food insecure than participants who were non-Hispanic white. This aligns with the broader finding identifying that race/ethnicity often intersect with income in shaping food insecurity risk (Janda et al., 2022). Janda and others highlight that communities of color are disproportionately affected by systemic barriers such as reduced access to full-service grocery stores and overreliance on small retailers with fewer healthy options (Beaulac et al., 2009; Walker et al., 2010; Janda et al., 2022).
+
+  Rural Texans face unique and persistent barriers to food security, often shaped by limited infrastructure, social isolation and inadequate food retail presence. Dean and Sharkey (2011) emphasized that rural areas not only lack supermarkets, but exhibit weaker social networks and less communal support. These factors further undermine resilience against food insecurity. Janda et al. (2022) extends on this understanding by showing that rural residents in Central Texas often live farther from supermarkets, an average of 1.66 miles but closer to convenience stores with an average of 0.67 miles. This proximity gap disproportionately affects low-income and Hispanic households, exacerbating nutritional disparities and increasing vulnerability to food insecurity (Janda et al., 2022). 
+
+  Moreover, the uneven distribution of food retailers and limited transportation options in rural areas indicate that effective solutions must be customized to local needs and the resident’s lived experiences. Janda et al. (2022), emphasize the importance of incorporating factors such as perceived accessibility, community preferences and cultural appropriateness. These factors are often overlooked in conventional approaches to identify food deserts. 
+
+## Policy Landscape and Limitations
+
+  SNAP (formerly known as food stamps) is the largest federal food assistance initiative in the United States. It is designed to alleviate food insecurity by providing financial support for low-income families. While SNAP reduces food insecurity by helping millions of families each year, its effectiveness is still limited by structural and environmental factors. 
+Grummon and Taillie (2018) found that even with SNAP participation, there are still racial disparities in purchasing patterns. Their findings show that Black SNAP participants tended to purchase more processed meats, sweeteners, and low-nutrient foods compared to White participants of the program (Grummon & Taillie, 2018). Notably, these disparities do not appear in non-participating families. This suggests that the SNAP program, although it may aid in access to food, does not enhance diet quality equally among different racial/ethnic groups (Grummon & Taillie, 2018). 
+
+  Odoms-Young (2018) highlights how these disparities are influenced by structural racism in food systems and public policy. Factors such as housing segregation, financial inequality, and high incarceration rates disproportionately impact communities of colour (Odoms-Young, 2018). These factors create barriers to food assistance and healthy food options. The author also notes that these racial disparities exist even when socioeconomic factors are removed (Odoms-Young, 2018), highlighting once again that race independently impacts access to nutritious foods. 
+
+  A study of a low-income Latino neighbourhood in Upstate New York by Lopez-Class and Hosler (2010) revealed that most local stores that accepted SNAP still provided limited access to nutritious items and high food prices. For example, only one store in the entire neighbourhood carried high-fiber bread compared to seven in the adjacent non-Latino neighbourhood (Lopez-Class & Hosler, 2010). On top of this, many of the stores were not disability-accessible and public transport to these locations was insufficient (Lopez-Class & Hosler, 2010). Consequently, residents without cars were often forced to rely on smaller retailers with higher prices and fewer nutritional options, which erodes the intended support of SNAP assistance (Lopez-Class & Hosler, 2010). 
+
+  In conclusion, while SNAP has been critical for tackling food insecurity, its current system fails to address the disparities in purchasing patterns of minority groups and the system issues that lead to these racial and geographic disparities. Effective policy reforms are required to consider inequitable food access caused by transportation limitations, and racial and place-based disparities that constrain how SNAP assistance is used. 
+
+## Gaps in the Literature
+
+  Despite substantial research on food insecurity in the United States, particularly in Texas, a significant gap remains. The gaps are seen in studies that integrate both spatial and racial/ethnic dimensions using spatially explicit methods. Most of the existing studies focus on racial disparities (e.g. food insecurity among Black, Latino and immigrant community) or spatial disparities (e.g. rural-urban food deserts) but rarely examine how race, place and poverty interact at a localized scale (Beaulac et al., 2009; Myers & Painter, 2017). Myers and Painter (2017) found persistent food insecurity divide across racial/ethnic and nativity lines, even after controlling for socioeconomic status. On the other hand, spatial studies like Janda et al. (2022) and Lopez-Class & Hosler (2010) underscore geographic barriers like proximity to supermarkets but does not consistently take into account for racialized experiences of those affected. Furthermore, studies examining the impact on SNAP on reducing disparities have primary used cross-sectional or nationwide datasets. This often fails to capture how SNAP participation intersect with race and geographical context at a local level (Grummon & Taillie, 2018). This leaves an analytical blind spot regarding localized, intersectional factors of food insecurity in Texas. This project hopefully contributed to closing this gap by using inferential and spatial statistical methods to examine how race, income, location and SNAP usage interact, offering a greater understanding of food access inequalities in Texas.
+
 
 # Study area
 
@@ -147,358 +177,33 @@ The data used for this study ranges over a nine-year period between 2006 to 2014
 
 # Methods
 
-This study uses RStudio to conduct a series of data processes to visualize and find relationships between pre-selected variables for Kentucky, USA. The independent variable used in this study is the opioid use data for Kentucky based on pills per person, per county. The different variables used are the income and education levels per county in Kentucky. This study conducts area data processes including choropleth maps to emphasize important trends and patterns in the data, scatterplots, and regression analyses to determine relationships between opioid use data and the variables.
+## Methods for Descriptive Statistics
+
+## Methods for Spatial Statistics 
+County-level data on food stamp usage and race in Texas were analyzed using the df_race.rds shapefile. This shapefile included variables such as the percentage of residents receiving food stamps and racial composition. It was imported into R and reprojected using st_transform() to EPSG:3857 to ensure accurate distance-based and spatial relationship calculations.
+
+	To visualize the geographic distribution of food stamp usage, an initial choropleth map was created using ggplot() and geom_sf(), with the variable food_stamp_p representing the percentage of food stamp recipients in each county. The scale_fill_viridis_c() was used to apply a colour gradient that improves interpretability for viewers by emphasizing variation in values. Prior to analysis, counties with missing values were excluded using filter(!is.na(food_stamp_p)) to prevent skewed results and ensure clean spatial computations.
+	
+To analyze local spatial interactions, a neighbourhood structure was established using Queen contiguity through the poly2nb() function, which identifies counties as neighbours if they share a boundary or a corner point. This structure was then transformed into a spatial weights matrix using nb2listw(), allowing the influence of neighbouring counties to be incorporated into subsequent spatial analyses.
+
+Spatial moving averages (SMAs) were computed using lag.listw() for key variables such as food stamp usage (sma_food_stamp_p) and racial proportions (e.g., sma_white_p, sma_black_p, sma_asian_p, sma_american_indian_p, sma_pacific_islander_p, sma_other_p). SMAs provide a smoothed view of regional patterns by averaging the values of surrounding counties instead of the raw data. This approach emphasizes clusters of consistent low or high values, making the broader spatial trend easy to identify. 
+
+A null simulation envelope was generated to assess whether observed spatial patterns were stronger than would be expected under random distribution. It involved randomizing the food stamp usage values using a sample (food_stamp_p) and recalculating the SMA of the randomized data. Therefore, it created a baseline scenario representing spatial randomness, allowing for visual and statistical comparison with the actual SMA pattern. The difference between the observed and randomized results offers insight into the presence and strength of spatial autocorrelation within the data. 
+
+	The local Gi* statistic (Local G) was computed using localG() from the spdep package to identify areas of statistically significant clustering. This technique evaluates each county’s value relative to the average of its neighbouring counties and generates a Z-score. This Z-score determines whether it belongs to a statistically significant high-value cluster (hotspot) or a low-value cluster (coldspot). The analysis was applied to food stamp usage and racial proportion to explore the spatial overlap between race and food insecurity. The resulting Gi* values were incorporated using mutate() and converted to numeric format using as.numeric() to enable plotting. Since localG() outputs a specialized object class, converting the results to numeric format was required to ensure compatibility with ggplot() for mapping and visualization.
+	
+	Lastly, maps were generated to visualize the Gi* Z-scores using ggplot() and scale_fill_gradient2(), with a midpoint of zero. Red tones indicated statistically significant hotspots (high-value clusters), blue/green tones indicated coldspots (low-value clusters), and yellow areas represented neutral or non-significant regions. This mapping approach successfully highlighted clusters of food insecurity and racial distribution, offering a spatial perspective for understanding systemic disparities among the counties in Texas. 
+	
+## Methods for Regression
 
 # Results
 
-To begin this research study, data was collected in order to create a general understanding of the trends. This includes the history of opioid use in Kentucky. Figure \ref{fig:annual-dosage} shows the general pattern of opioid use across counties in Kentucky, depicting pills per person, from 2006 to 2014. 
 
-```{r plot-annual-dosage, echo=FALSE, fig.cap={"\\label{fig:annual-dosage}Annual opioid pills per person by county in Kentucky, USA (2006-2014)"}}
-ggplot() +
-  geom_sf(data = KY, 
-          aes(fill = per_person, 
-              color = per_person)) + 
-  scale_fill_viridis(direction = -1, option = "B")+
-  scale_color_viridis(direction = -1, option ="B") +
-  #coord_sf(crs = 26915) + This crs is NAD83 UTM zone 15N - not really needed for plotting here but projecting the data may be required later
-  theme_void()+
-  theme(panel.grid.major = element_line(colour = 'transparent')) +
-  labs(caption="Source: The Washington Post, ARCOS") +
-  facet_wrap (~ year, ncol =2)
-```
-
-Similar to Figure \ref{fig:annual-dosage}, a nine-year average showing opioid use, of pills per person, for each county can be made (see Figure \ref{fig:mean-annual-dosage}). This provides a clearer distinction of changes in each county over the years in a single map, rather than several maps.
-
-```{r calculate-annual-mean-dosage, include=FALSE}
-KY_AVG_Per <- KY %>% 
-  st_drop_geometry() %>%
-  group_by(COUNTYFP) %>% # Group by county
-  summarize(DOSAGE_UNIT = mean(DOSAGE_UNIT), # calculate the 9 year average `DOSAGE_UNIT` for every county
-            per_person = mean(per_person)) %>% # calculate the 9 year average `per_person` for every county
-  left_join(KY_shape, by = "COUNTYFP") %>% # join to the sf object
-  st_as_sf() # convert to sf
-```
-
-```{r map-mean-per-person-dose, echo=FALSE, fig.cap={"\\label{fig:mean-annual-dosage}Mean annual opioid pills per person by county in Kentucky, USA (9-year average, 2006-2014)"}}
-#Map the average dosage unit per person per year from 2006-2014.
-ggplot() +
-  geom_sf(data = KY_AVG_Per, 
-          aes(fill = per_person),
-          color = "white") + 
-  scale_fill_viridis(direction = -1, 
-                     option = "B", 
-                     name="Pills per capita") +
-  theme_void()+
-  theme(panel.grid.major = element_line(colour = 'transparent')) +
-  labs(caption="Source: The Washington Post, ARCOS") 
-```
-
-Figure \ref{fig:cartogram-mean-annual-dosage} is a cartogram showing regions with high usage of opioids. This cartogram emphasizes the highest changes in purchases in pills in each county over the selected nine years.
-```{r create-cartogram, include=FALSE}
-KY_per_person_cartogram <- KY_AVG_Per %>%
-  st_transform(crs = 26916) %>%
-  cartogram_cont(weight = "per_person")
-```
-
-```{r map-per-person-dose-cartogram, echo=FALSE, fig.cap={"\\label{fig:cartogram-mean-annual-dosage}Cartogram of mean annual opioid pills per person by county in Kentucky, USA (9-year average, 2006-2014)"}}
-ggplot(KY_per_person_cartogram, aes(fill = per_person)) +
-  geom_sf(color = "white") + 
-  scale_fill_viridis(direction = -1, option = "B", name="Pills per Person")+
-  theme_void() +
-  theme(panel.grid.major = element_line(colour = 'transparent')) +
-  labs(caption="Source: The Washington Post, ARCOS")
-```
-
-Next, a series of maps were created; five choropleth maps with simulated spatial moving averages and a sixth with the empirical spatial moving averages. Figure \ref{fig:simulated-landscapes} is the original landscape of the average dosage unit per person compared to the five null landscapes.
-```{r create-contiguities-object, include=FALSE}
-# Create listw object
-KY_Pills.w <- KY_AVG_Per %>% 
-  as("Spatial") %>% 
-  poly2nb() %>%
-  nb2listw()
-```
-
-```{r calculate-spatial-moving-averages, include=FALSE}
-# Observed data
-KY_AVG_Per <- KY_AVG_Per %>%
-  mutate(sma = lag.listw(KY_Pills.w, per_person))
-
-# Null landscape/simulation #1
-simulation_1 <- sample(KY_AVG_Per$per_person)
-# Calculate spatial moving average
-simulation_1.sma <- lag.listw(KY_Pills.w, simulation_1)
-# Null landscape/simulation #2
-simulation_2 <- sample(KY_AVG_Per$per_person)
-simulation_2.sma <- lag.listw(KY_Pills.w, simulation_2)
-
-# Null landscape/simulation #3
-simulation_3 <- sample(KY_AVG_Per$per_person)
-simulation_3.sma <- lag.listw(KY_Pills.w, simulation_3)
-
-# Null landscape/simulation #4
-simulation_4 <- sample(KY_AVG_Per$per_person)
-simulation_4.sma <- lag.listw(KY_Pills.w, simulation_4)
-
-# Null landscape/simulation #5
-simulation_5 <- sample(KY_AVG_Per$per_person)
-simulation_5.sma <- lag.listw(KY_Pills.w, simulation_5)
-```
-
-```{r add-simulated-landscapes, include=FALSE}
-#Add simulated landscapes to sf dataframe
-KY_AVG_Per$simulation_1 <- simulation_1
-KY_AVG_Per$simulation_2 <- simulation_2
-KY_AVG_Per$simulation_3 <- simulation_3
-KY_AVG_Per$simulation_4 <- simulation_4
-KY_AVG_Per$simulation_5 <- simulation_5
-
-#Add spatial moving averages to sf dataframe
-KY_AVG_Per$simulation_1.sma <- simulation_1.sma
-KY_AVG_Per$simulation_2.sma <- simulation_2.sma
-KY_AVG_Per$simulation_3.sma <- simulation_3.sma
-KY_AVG_Per$simulation_4.sma <- simulation_4.sma
-KY_AVG_Per$simulation_5.sma <- simulation_5.sma
-```
-
-```{r gather-simulated-landscapes, include=FALSE}
-#Create a new dataframe to compare original landscape to null landscapes
-KY_AVG2 <- KY_AVG_Per %>% 
-  # `transmute()` keeps only the spatial moving averages and geometry
-  transmute(observed = per_person, 
-         simulation_1,
-         simulation_2,
-         simulation_3,
-         simulation_4,
-         simulation_5,
-         geometry) %>% 
-  # `pivot_longer()` places all variables with the exception of `geometry` in a single column named `SMA` and creates a new variable called `VAR` with the names of the original columns (i.e., observed, simulation_1,...)
-  pivot_longer(cols = -c(geometry, ends_with("sma")), names_to = "VAR", values_to = "values") %>%
-  st_as_sf()
-```
-
-```{r map-simulated-landscapes, echo=FALSE, fig.cap={"\\label{fig:simulated-landscapes}Maps showing the empirical distribution of mean annual opioid pills per person and five simulated landscapes"}}
-ggplot() + 
-  geom_sf(data = KY_AVG2, 
-          aes(fill = values), color = NA) + 
-  facet_wrap(~VAR, ncol = 3) +
-  scale_fill_viridis(direction = -1, option = "B")+
-  labs(fill = "Pills per SMA") + 
-  theme(axis.text.x = element_blank(), 
-        axis.text.y = element_blank())
-```
-
-By plotting the data of the spatial moving averages in Figure \ref{fig:simulated-landscapes}, the data can be further analyzed. The plots of the empirical and simulated spatial moving averages are shown in Figure \ref{fig:scatterplot-moving-averages}.
-
-```{r gather-moving-averages-2, echo=FALSE}
-KY_AVG2 <- KY_AVG2 %>% 
-  data.frame(KY_AVG_Per %>% 
-               st_drop_geometry() %>% # Drop the geometry because it is already available 
-               # Select the original population density and the 5 null landscapes simulated from it.
-               transmute(sma,
-                      simulation_1.sma,
-                      simulation_2.sma,
-                      simulation_3.sma,
-                      simulation_4.sma,
-                      simulation_5.sma,
-               ) %>% # Pass the result to `pivot_longer()`  
-               pivot_longer(cols = everything(), names_to = "VAR", values_to = "SMA") %>% # Copy all density variables to a single column, and create a new variable called `VAR` with the names of the original columns 
-               select(SMA)) # Drop VAR from the the dataframe
-```
+##
 
 
-```{r spatial-moving-averages, echo=FALSE, fig.cap={"\\label{fig:scatterplot-moving-averages}Moran's scatterplots of empirical and simulated spatial moving averages of mean annual opioid pills per person"}}
-ggplot(data = KY_AVG2, 
-       aes(x = values, 
-           y = SMA,
-           color = VAR)) +
-  geom_point(alpha = 0.1) +
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
-  # Add a fitted line to the plots
-  geom_smooth(formula = y ~ x,
-              method = "lm") +
-  coord_equal() +
-  xlab("Pills per person") +
-  ylab("Spatial lag of pills per person") +
-  facet_wrap(~ VAR, ncol = 3)
-```
 
-```{r include=FALSE}
-KY_AVG_Per <- KY_AVG_Per %>% 
-  # Modify values in dataframe
-  mutate(Rate_z = per_person - mean(per_person), # Substract the mean, so that the variable now is deviations from the mean 
-         SMA_z = lag.listw(KY_Pills.w, Rate_z)) # Calculate the spatial moving average of the newly created variable `Density_z`
-```
 
-```{r moran-test, include=FALSE}
-mc <- moran.test(KY_AVG_Per$per_person, KY_Pills.w)
-```
-
-<!--We can include inline calculations in the text by using r code as shown in the paragraph below-->
-To further explore and understand the opioid use data, the spatial autocorrelation can be calculated. Figure \ref{fig:moran-scatterplot} is a Moran's scatterplot of the observed number of pills per person. The standardized value of the Moran's I statistic is `r round(mc$statistic, 4)` and the corresponding $p$-value is `r ifelse(mc$p.value >= 0.0001, round(mc.pvalue, 4), "<0.0001")`. The null hypothesis is spatial independence. Since the $p$-value is a small number, we can reject the null hypothesis with a high degree of confidence.
-
-```{r moran-scatterplot, echo=FALSE, fig.cap={"\\label{fig:moran-scatterplot}Moran's scatterplot of empirical variable (observed)"}}
-# Confirming the results from the Moran coefficient above. We use "moran.plot" to illustrate the SMA of rate by county
-mp <- moran.plot(KY_AVG_Per$per_person, 
-                 KY_Pills.w,
-                 xlab = "Pills per person",
-                 ylab = "Spatial lag of pills per person")
-```
-
-Figure \ref{fig:lisa} is a plot of the local indicators of spatial association (LISA), that is the local version of Moran's I. As seen in Moran's scatterplot (Figure \ref{fig:moran-scatterplot}), a county can have high levels of pills per capita (higher than the global mean), and be surrounded by counties that on average have high levels of pills per capita. This combination is termed "High-High". Another possibility is that a county has low levels of pills per capita (below the global mean), and the neighboring counties have also on average low levels of pills per capita. This combination is termed "Low-Low". The other two combinations are "High-Low" and "Low-High". Calculating the LISA allows us to categorize counties into one of these classes. Further, if we map these statistics we can visualize concentrations of high or low values, or transition zones. This type of map also makes it easy to visualize where a statistic is significant or not. It allows for easy analysis to detect _hot spots_, regions with high levels of pills per capita, or cold spots, regions with low levels of pills per capita. In Figure \ref{fig:lisa}, the statistic that can either be significant or not.
-
-```{r lisa, include=FALSE}
-Per_person.lm <- localmoran(KY_AVG_Per$per_person, KY_Pills.w)
-summary(Per_person.lm)
-```
-
-```{r join-lisa-to-data, echo=FALSE}
-KY_AVG_Per <- left_join(KY_AVG_Per, 
-                        data.frame(GEOID = KY_AVG_Per$GEOID, 
-                                   Per_person.lm), 
-                        by = c("GEOID"))
-KY_AVG_Per <- rename(KY_AVG_Per, p.val = Pr.z...0.)
-```
-
-```{r lisa-map, echo = FALSE, fig.cap={"\\label{fig:lisa}Map of local statistics of spatial association, used to detect hot and cold spots"}}
-# Now it is possible to map the local statistics:
-#plot_ly(KY_AVG_Per) %>%
-#  add_sf(split = ~(p.val < 0.05), color = ~Type, colors = c("red", "khaki1", "dodgerblue", "dodgerblue4")) 
-KY_AVG_Per %>%
-  mutate(significance = p.val <= 0.05,
-         Type = case_when((Rate_z >= 0 & SMA_z >= 0) & significance == TRUE ~ "HH significant",
-                          (Rate_z >= 0 & SMA_z >= 0) & significance == FALSE ~ "HH not significant",
-                          (Rate_z < 0 & SMA_z < 0) & significance == TRUE ~ "LL significant",
-                          (Rate_z < 0 & SMA_z < 0) & significance == FALSE ~ "LL not significant",
-                          (Rate_z * SMA_z < 0) & significance == TRUE ~ "HL/LH significant",
-                          (Rate_z * SMA_z < 0) & significance == FALSE ~ "HL/LH not significant"),
-         Type = factor(Type,
-                       levels = c("HH significant",
-                                  "HH not significant",
-                                  "HL/LH significant",
-                                  "HL/LH not significant",
-                                  "LL significant",
-                                  "LL not significant"))) %>%
-  ggplot() +
-  geom_sf(aes(fill = Type),
-          color = "gray80") + 
-  scale_fill_manual(values = c("HH significant" = "red", 
-                               "HH not significant" = "rosybrown1",
-                               "LL significant" = "dodgerblue",
-                               "LL not significant" = "lightblue",
-                               "HL/LH significant" = "gray",
-                               "HL/LH not significant" = "white")) +
-  theme_void() +
-  theme(panel.grid.major = element_line(colour = 'transparent'))
-```
-
-Figure \ref{fig:household-income} represents the mean annual household income in the counties in Kentucky. The darker the regions, the higher the yearly income. This map shows the general trend for income (2010) which is one of the variables that is used to analyze opioid usage in Kentucky.
-
-```{r join-income-data, echo=FALSE}
-income_fip <- income_fip %>%  
-  rename(income = Mean) %>%
-  mutate(GEOID = as.character(GEOID))
-KY_AVG_Per <- KY_AVG_Per %>% 
-  left_join(income_fip,
-            by=("GEOID"))
-```
-
-```{r map-household-income, echo=FALSE, fig.cap={"\\label{fig:household-income}Mean annual household income in 2010"}}
-ggplot() +
-  geom_sf(data = KY_AVG_Per, 
-          aes(fill = income/10000),
-          color = "white") + 
-  scale_fill_viridis(direction = -1, 
-                     option = "B",
-                     name = "Mean household income ($10,000)") +
-  theme_void() +
-  theme(panel.grid.major = element_line(colour = 'transparent'),
-        legend.position = "bottom") +
-  labs(caption="Source: US Census Bureau")
-```
-
-The second variable that is analyzed with opioid usage is education. Figure \ref{fig:education} displays the percent of the population in each county who received a high school diploma by 2014. This data will also be compared to the opioid use of Kentucky.
-
-```{r join-education-data, echo=FALSE}
-education_ky <- education_ky %>%  
-  mutate(GEOID = as.character(GEOID))
-
-KY_AVG_Per <- KY_AVG_Per %>%
-  left_join(education_ky, 
-            by=("GEOID"))
-```
-
-```{r map-education-data, echo=FALSE, fig.cap={"\\label{fig:education}Educational attainment in Kentucky: percent of population with high school degree or higher (2014)"}}
-ggplot() +
-  geom_sf(data = KY_AVG_Per,
-          aes(fill = HSDeg),
-          color = "white") +
-  scale_fill_viridis(direction = -1, 
-                     option = "B",
-                     name = "% of population") +
-  theme_void() + 
-  theme(panel.grid.major = element_line(colour = 'transparent'),
-        legend.position = "bottom") +
-  labs(caption="Source: US Census Bureau")
-```
-
-To determine relationships between opioid use and the chosen variables, they must be regressed to the opioid use data. Figure 12 shows the average household income per county in Kentucky regressed to the number of opioid pills per person. Figure 13 shows the percent of the population per county that has obtained a high school degree regressed to the number of opioid pills per person.
-```{r echo=FALSE}
-#income_fip <- income_fip %>%  
-#    mutate(GEOID = as.character(GEOID))
-#KY_AVG_Per <- left_join(KY_AVG_Per, income_fip, by=("GEOID"))
-```
-
-\newpage
-
-```{r model-income, echo=FALSE, message=FALSE, results="asis"}
-# Use `lm()` to estimate a linear regression model
-model1 <- lm(formula = per_person ~ income, 
-             data = KY_AVG_Per)
-
-# Use stargazer to print table with results of model
-stargazer(model1,
-          header = FALSE,
-          title = "Mean annual opioid pills per person regressed on mean household income")
-```
-
-```{r plot-model-income, echo = FALSE, fig.cap={"\\label{fig:model-income}Regression analysis of income and mean annual opioid pills per person"}}
-ggplot(data = KY_AVG_Per, 
-       aes(x = income, 
-           y = per_person))+
-  geom_point() +
-  geom_smooth(formula = y ~ x,
-              method = "lm") +
-  xlab("Mean annual household income") +
-  ylab("Pills per person")
-```
-
-\newpage
-
-```{r model-education, echo=FALSE, message=FALSE, results="asis"}
-# Use `lm()` to estimate a linear regression model
-model2 <- lm(formula = per_person ~ HSDeg,
-             data = KY_AVG_Per)
-
-# Use stargazer to print table with results of model
-stargazer(model2,
-          header = FALSE,
-          title = "Mean annual opioid pills per person regressed on proportion of population with high school degree or higher")
-```
-
-```{r plot-model-education, echo=FALSE, fig.cap={"\\label{fig:model-education}Regression analysis of educational attainement and mean annual opioid pills per person"}}
-ggplot(data = KY_AVG_Per, 
-       aes(x = HSDeg, 
-           y = per_person))+
-  geom_point() +
-  geom_smooth(formula = y ~ x,
-              method = "lm") +
-  xlab("% population highschool or above") +
-  ylab("Pills per person") 
-```
-
-\newpage
-
-These figures have been created to visualize and to show trends that might not be seen otherwise. General maps, choropleth maps, scatterplots and regression analyses were conducted to understand and find relationships between the use of opioids and income and/or education levels.
 
 # Analysis
 
@@ -531,3 +236,41 @@ Through the data processing methods used, patterns of spatial autocorrelation wi
 Having conducted the series of data analysis, it can be concluded that there is a causal relationship between education and income and opioid usage whereby increased education and income can result in less opioid usage and resulting consequences. However, it is recommended that further studies be conducted to confirm these trends with a high degree of accuracy. In addition, these studies could focus on the comparison between various states within the United States to further assess how states compare and where more resources should be allocated.
 
 # References
+
+
+<!-- Hanging indent block -->
+<div style="margin-left: 0.5in; text-indent: -0.5in; line-height: 1.5;">
+
+Beaulac, J., Kristjansson, E., & Cummins, S. (2009). A systematic review of food deserts, 1966–2007. *Prevention of Chronic Disease, 6*, A105. https://resolver-scholarsportal-info.libaccess.lib.mcmaster.ca/resolve/15451151/v06i0003/nfp_asrofd1.xml  
+<br><br>
+Coleman-Jensen, A., Rabbitt, M. P., Gregory, C. A., & Singh, A. (2019). *Household Food Security in the United States in 2018 (Economic Research Report Number 270)*. https://doi.org/10.22004/ag.econ.301167  
+<br><br>
+Dean, W. R., & Sharkey, J. R. (2011a). Food insecurity, social capital and perceived personal disparity in a predominantly rural region of Texas: An individual-level analysis. *Social Science & Medicine, 72(9)*, 1454–1462. https://doi.org/10.1016/j.socscimed.2011.03.015  
+<br><br>
+Dean, W. R., & Sharkey, J. R. (2011b). Rural and urban differences in the associations between characteristics of the community food environment and fruit and vegetable intake. *Journal of Nutrition Education and Behavior, 43(6)*, 426–433. https://doi.org/10.1016/j.jneb.2010.07.001  
+<br><br>
+Government of Canada, S. C. (2023, November 14). *Food insecurity among Canadian families*. https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00013-eng.htm  
+<br><br>
+Grummon, A. H., & Taillie, L. S. (2018). Supplemental Nutrition Assistance Program participation and racial/ethnic disparities in food and beverage purchases. *Public Health Nutrition, 21(18)*, 3377–3385. https://doi.org/10.1017/S1368980018002598  
+<br><br>
+Hernandez, D. C., Reesor, L. M., & Murillo, R. (2017). Food insecurity and adult overweight/obesity: Gender and race/ethnic disparities. *Appetite, 117*, 373–378. https://doi.org/10.1016/j.appet.2017.07.010  
+<br><br>
+Janda, K. (2020). *A Geospatial Examination Of The Association Between Geographic Food Access And Food Insecurity In Central Texas: The Role Of Race/Ethnicity And Urbanicity* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/134  
+<br><br>
+Janda, K. M., Ranjit, N., Salvo, D., Hoelscher, D. M., Nielsen, A., Casnovsky, J., & van den Berg, A. (2022). Examining geographic food access, food insecurity, and urbanicity among diverse, low-income participants in Austin, Texas. *International Journal of Environmental Research and Public Health, 19(9)*. https://doi.org/10.3390/ijerph19095108  
+<br><br>
+Lopez-Class, M., & Hosler, A. S. (2010). Assessment of community food resources: A Latino neighborhood study in upstate New York. *Journal of Poverty, 14(4)*, 369–381. https://doi.org/10.1080/10875549.2010.517070  
+<br><br>
+Myers, A. M., & Painter, M. A. (2017). Food insecurity in the United States of America: An examination of race/ethnicity and nativity. *Food Security, 9(6)*, 1419–1432. https://doi.org/10.1007/s12571-017-0733-8  
+<br><br>
+Nam, Y., Huang, J., Heflin, C., & Sherraden, M. (2015). Racial and ethnic disparities in food insufficiency: Evidence from a statewide probability sample. *Journal of the Society for Social Work and Research, 6(2)*, 201–228. https://www.journals.uchicago.edu/doi/10.1086/681574  
+<br><br>
+Odoms-Young, A. M. (2018). Examining the impact of structural racism on food insecurity: Implications for addressing racial/ethnic disparities. *Family & Community Health, 41*(Suppl 2 FOOD INSECURITY AND OBESITY), S3–S6. https://doi.org/10.1097/FCH.0000000000000183  
+<br><br>
+Ramphul, R. (2020). *Using Spatial Methods To Better Understand Food Insecurity And Snap Under-Participation In Texas* [Master’s thesis, UTHealth School of Public Health]. Dissertations & Theses (Open Access). https://digitalcommons.library.tmc.edu/uthsph_dissertsopen/227  
+<br><br>
+Samuel, L. J., Crews, D. C., Swenor, B. K., et al. (2023). Supplemental Nutrition Assistance Program access and racial disparities in food insecurity. *JAMA Network Open, 6(6)*, e2320196. https://doi.org/10.1001/jamanetworkopen.2023.20196  
+<br><br>
+Walker, R. E., Keane, C. R., & Burke, J. G. (2010). Disparities and access to healthy food in the United States: A review of food deserts literature. *Health & Place, 16(5)*, 876–884. https://doi.org/10.1016/j.healthplace.2010.04.013  
+
+</div>
