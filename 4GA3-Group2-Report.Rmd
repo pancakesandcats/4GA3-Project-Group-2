@@ -48,7 +48,26 @@ library(tidycensus)
 
 # Introduction
 
-Insert here
+Approximately 18 million households experienced food insecurity at some point in 2023, with almost 7 million facing very low food insecurity (USDA, 2025). This makes up 13.5% of the total households in the United States of America, an increase of approximately one million households from 2022. Texas holds the second-highest rate of all states. 16.9% of Texas households face food insecurity in 2023 (USDA, 2025). This means that 16.9% of households went without access to nutritious and safe foods at some time in 2023. Caring about the impact that race has on food insecurity is crucial, as it highlights the systemic inequalities within marginalized communities. To understand this issue and strive for a state with adequate food for all residents, further understanding of the problem is needed.
+Additionally, studies have shown that access to food is impacted by race (Beaulac et al., 2009). This paper aims to examine the relationship between race and food insecurity in the state of Texas, U.S., using food stamp usage as a proxy measure for food insecurity. The goal is to understand the relationship between these variables and why this phenomenon may occur. By the end of this paper, a better understanding of the overarching topic of racial disparities in food insecurity, specifically in Texas, will be found.
+
+Three research questions guide the analysis in this paper:
+	(1) How do race and food stamp usage vary across Texas counties?
+
+	(2) Are there any clusters of food insecurity, and do these clusters correlate with racial composition?
+
+	(3) Does racial composition predict food insecurity after accounting for socioeconomic factors and other confounders, and does this relationship vary geographically?
+
+Our report will cover three primary sections:
+
+## Descriptive Statistics
+The first section of analysis will analyze the basic patterns of race and food stamp usage, calculating descriptive statistics for both variables to address the first research question. The results of this section are summarized in tables of descriptive statistics. Choropleth maps are used to visualize the spatial trends in this data. This section identifies the baseline geographic patterns of food insecurity and racial composition.
+
+## Spatial Statistics
+Next, to address research question two, food insecurity and racial composition will be tested to identify any clustering or distribution. These are methods of spatial autocorrelation. Food stamp usage hotspots are tested for overlap with clusters of certain racial groups. 
+
+## Inferential Statistics (Research Question 3) 
+The final analysis section uses OLS regression models to control for confounding variables such as income or education. Regression analysis will reveal the extent to which race plays a role in predicting food insecurity, independent of any possible confounders. Methods of geographically weighted regression models are used to better understand the role of geography in shaping this relationship.
 
 # Background
 
@@ -92,8 +111,7 @@ Grummon and Taillie (2018) found that even with SNAP participation, there are st
 
 # Study area
 
-  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. There are many studies conducted in Texas that detail the relationship between food insecurity and other variables. In a study by Beaulac et al. (2009), it was found that food access in the U.S. is significantly impacted by both income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them. Tracts were chosen due to their small size, allowing for more effective comparisons between places within the state when compared to counties, which are much larger and do not represent within-state differences in food security and demographics.
-
+  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. Many studies conducted in Texas have detailed the relationship between food insecurity and other variables. A study by Beaulac et al. (2009) found that food access in the U.S. is significantly impacted by income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them.
 
 ```{r, include=FALSE}
 options(tigris_use_cache = TRUE)
