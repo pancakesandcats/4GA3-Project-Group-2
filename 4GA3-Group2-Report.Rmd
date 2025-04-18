@@ -443,7 +443,7 @@ ggplot(df_race_filter) +
   labs(title = "Gi* Hotspot Analysis of Food Stamp Usage (Null Landscape)")
 ```
 
-## Gi* for Each Race
+### Gi* for Each Race
 ``` {r}
 # Computing Local G for Each Race
 df_race_filter <- df_race_filter %>%
