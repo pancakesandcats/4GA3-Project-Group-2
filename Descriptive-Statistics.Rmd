@@ -7,7 +7,8 @@ output: html_notebook
 library(sf)
 library(cartogram)
 library(tigris)
-library(tidyver)
+library(tidyverse)
+library(gtsummary)
 ```
 
 
@@ -95,6 +96,7 @@ ggplot(df_race, aes(fill = food_stamp_p)) +
   theme_void() +
   scale_fill_viridis_c(option = "turbo")
 ```
+
 
 # Cartograms
 
