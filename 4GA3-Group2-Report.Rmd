@@ -57,6 +57,11 @@ library(textreg)
 library(viridis) #Viridis colour scheme for mapping
 library(tidycensus)
 ```
+
+```{r}
+df_race <- readRDS("df_race.rds")
+```
+
 \newpage
 # Introduction
 
@@ -544,15 +549,15 @@ A Spatial Error Model was employed to account for residual spatial dependence. T
 
 The Spatial Error Model (SEM) reveals statistically significant relationships between food stamp usage and racial composition across Texas census tracts. Because the per capita proportions for all race groups must sum to 1.00, the White race category was excluded from the regression to avoid multicollinearity. Therefore, “White” serves as the reference group. 
 
-Holding all other variables constant, a one percent increase in the share of Black residents corresponds to a 0.057% rise in per capita food stamp usage (p < 0.0001), while a one percent increase in the “other” category yields a 0.037% increase (p < 0.0001). In contrast, a one percent uptick in the Asian share leads to a 0.018% decrease in food stamp usage (p ≈ 0.007). The American Indian and Pacific Islander coefficients are not statistically significant at the 10% level (p = 0.603 and p = 0.198, respectively). 
+Holding all other variables constant, a one percent increase in the share of Black residents corresponds to a 0.057% rise in per capita food stamp usage (p < 0.0001), while a one percent increase in the “other” category yields a 0.037% increase (p < 0.0001). In contrast, a one percent uptick in the Asian share leads to a 0.018% decrease in food stamp usage (p $\approx$ 0.007). The American Indian and Pacific Islander coefficients are not statistically significant at the 10% level (p = 0.603 and p = 0.198, respectively). 
 
 Among the control variables, every additional $10,000 in median household income predicts about a 0.006% decrease in per capita food stamp usage (p < 0.0001). On the other hand, higher values in per-capita households with children and unemployment rate increase reliance on food stamps by 0.197% and 0.133% respectively (both p < 0.0001).
 
-The SEM’s spatial error coefficient is λ = 0.53 (p < 0.001), indicating substantial spatial clustering in the regression errors. This high lambda value justifies our use of the SEM specification. Indeed, the SEM outperforms OLS with a much lower AIC (–26,092 vs. –24,818). 
+The SEM’s spatial error coefficient is $\lambda$ = 0.53 (p < 0.001), indicating substantial spatial clustering in the regression errors. This high lambda value justifies our use of the SEM specification. Indeed, the SEM outperforms OLS with a much lower AIC (–26,092 vs. –24,818). 
 
 ### Tests for Spatial Indepedence 
 
-To confirm that we’ve successfully removed residual spatial autocorrelation in the SEM specification, a Moran’s I test on the residuals was employed.The result of Moran’s I = –0.0396 (p < 0.0001) reveals a slight negative autocorrelation that is highly significant. This demonstrates that the SEM specification has sucsessfully absorbed spatial dependence in the residuals, thus validating the reliability of our regression coefficients. These reslults are illustrated below, with the Morans I test and a map of the spatially indepedent residuals. 
+To confirm that we’ve successfully removed residual spatial autocorrelation in the SEM specification, a Moran’s I test on the residuals was employed.The result of Moran’s I = –0.0396 (p < 0.0001) reveals a slight negative autocorrelation that is highly significant. This demonstrates that the SEM specification has successfully absorbed spatial dependence in the residuals, thus validating the reliability of our regression coefficients. These results are illustrated below, with the Morans I test and a map of the spatially independent residuals. 
 
 ```{r, results='asis', echo = FALSE}
 cat(readLines("morans_i_test_output.txt"), sep = "\n")
