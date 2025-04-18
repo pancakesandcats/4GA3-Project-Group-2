@@ -93,10 +93,12 @@ ggplot(df_race, aes(fill = other_p)) +
 ggplot(df_race, aes(fill = food_stamp_p)) + 
   geom_sf() + 
   theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  scale_fill_viridis_c(option = "turbo")
 ```
 
 # Cartograms
+
+these dont work!!!!!!!!! dont use
 
 ```{r}
 # st_transform(df_race)

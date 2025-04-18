@@ -25,6 +25,9 @@ output:
     # http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/
     # https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-ms.tex
     template: project-template-default.tex
+    toc: true
+    toc_depth: 3
+    number_sections: true
 always_allow_html: true
 ---
 
