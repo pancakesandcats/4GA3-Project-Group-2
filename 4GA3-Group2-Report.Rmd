@@ -100,7 +100,13 @@ The data used for the project primarily comes from the U.S. Census Bureau. This 
 
 Listed below are the U.S. Census Bureau variables used with their respective R codes (that allow us to import the data directly into R through the tidycensus package). The data used will be from 2023 which is the most recent year in which the data is available in R.
 
-Insert table
+```{r}
+data <- data.frame(
+  Name = c("Food stamp count", "Total population", "White population", "Black population", "Asian population", "American Indian and Alaska Native population", "Native Hawaiian or other pacific islander population", "Latino population", "Grocery store count", "Median income in the past 12 months"),
+  "R_Code" = c("B22003_002", "B01003_001", "B02001_002", "B02001_003", "B02001_005", "B02001_004", "B02001_006", "B03002_012", "B24134_112", "B06011_001"),
+  "Additional_Notes" = c("
+Not converted into per capita, will be done using the population variables.", "", "", "", "", "", "", "", "", "Used as a control variable."))
+```
 
 The food stamp count is crucial to use to identify food security or insecurity in each county, as that is the most relevant quantitative data relating to food security that we could find. By converting food stamp usage to per capita rates (using the population for each county), the similarities and/or differences in food stamp usage (and consequently, food security/insecurity) can be mapped using ggplot2. This can then be compared to racial demographics (mapped by comparing the white, black, Asian, American Indian and to see if there is a potential correlation between race and food insecurity/food stamp usage.
 
