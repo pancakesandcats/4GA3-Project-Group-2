@@ -89,7 +89,7 @@ Grummon and Taillie (2018) found that even with SNAP participation, there are st
 
 # Study area
 
-  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. There are many studies conducted in Texas that detail the relationship between food insecurity and other variables. In a study by Beaulac et al. (2009), it was found that food access in the U.S. is significantly impacted by both income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them.
+  Food insecurity was studied at the tract level in the state of Texas (see Figure 1). There are 6896 tracts in the state, and each of these tracts was used in the analysis. In the U.S., around 11.1% of households experience food insecurity. Texas faces higher rates, with 14% of families identifying as food insecure in 2018 (Coleman-Jensen et al. 2019). The state was selected for this reason, having a higher rate of food insecurity in the country. There are many studies conducted in Texas that detail the relationship between food insecurity and other variables. In a study by Beaulac et al. (2009), it was found that food access in the U.S. is significantly impacted by both income and race. This study was conducted to analyze the spatial patterns between these variables and discuss the potential reasons for them. Tracts were chosen due to their small size, allowing for more effective comparisons between places within the state when compared to counties, which are much larger and do not represent within-state differences in food security and demographics.
 
 
 ```{r, include=FALSE}
@@ -128,11 +128,7 @@ Not converted into per capita, will be done using the population variables.", ""
 
 # Methods
 
-## Methods for Descriptive Statistics
-
-insert here
-
-## Methods for Spatial Statistics 
+## Methods for Descriptive & Spatial Statistics 
   County-level data on food stamp usage and race in Texas were analyzed using the df_race.rds shapefile. This shapefile included variables such as the percentage of residents receiving food stamps and racial composition. It was imported into R and reprojected using st_transform() to EPSG:3857 to ensure accurate distance-based and spatial relationship calculations.
 
   To visualize the geographic distribution of food stamp usage, an initial choropleth map was created using ggplot() and geom_sf(), with the variable food_stamp_p representing the percentage of food stamp recipients in each county. The scale_fill_viridis_c() was used to apply a colour gradient that improves interpretability for viewers by emphasizing variation in values. Prior to analysis, counties with missing values were excluded using filter(!is.na(food_stamp_p)) to prevent skewed results and ensure clean spatial computations.
