@@ -198,6 +198,8 @@ Ramphul, R. (2020). *Using Spatial Methods To Better Understand Food Insecurity 
 <br><br>
 Samuel, L. J., Crews, D. C., Swenor, B. K., et al. (2023). Supplemental Nutrition Assistance Program access and racial disparities in food insecurity. *JAMA Network Open, 6(6)*, e2320196. https://doi.org/10.1001/jamanetworkopen.2023.20196  
 <br><br>
+USDA (2025). Food Security in the U.S. - Key Statistics & Graphics. Available at: https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-us/key-statistics-graphics#:~:text=13.5%20percent%20(18.0%20million)%20of,(17.0%20million)%20in%202022.
+<br><br>
 Walker, R. E., Keane, C. R., & Burke, J. G. (2010). Disparities and access to healthy food in the United States: A review of food deserts literature. *Health & Place, 16(5)*, 876–884. https://doi.org/10.1016/j.healthplace.2010.04.013  
 
 </div>
