@@ -61,7 +61,16 @@ A null simulation envelope was generated to assess whether observed spatial patt
 	
 	Lastly, maps were generated to visualize the Gi* Z-scores using ggplot() and scale_fill_gradient2(), with a midpoint of zero. Red tones indicated statistically significant hotspots (high-value clusters), blue/green tones indicated coldspots (low-value clusters), and yellow areas represented neutral or non-significant regions. This mapping approach successfully highlighted clusters of food insecurity and racial distribution, offering a spatial perspective for understanding systemic disparities among the counties in Texas. 
 
+##Methods for Regression Analyses 
+Regression models were estimated using tract-level data on per-capita food stamp usage, racial composition, and several control variables, including unemployment rate, median household income, and per-capita households with children.
 
+Initial analyses employed methods of Ordinary Least Squares (OLS) regression to examine the relationship between food stamp usage and racial composition, controlling for socioeconomic factors. To resolve the challenge of perfect multicollinearity, the White racial category was omitted as the reference group. Both linear and log-transformed models were tested to explore differences in functional form. However, a Moran’s I test using the moran.test() function revealed significant spatial dependence, prompting further investigation.
+
+To address spatial autocorrelation in the OLS residuals, a spatial weights matrix was constructed using a k-nearest neighbors approach. Tract centroids were calculated using st_centroid(), and neighborhoods were defined with k=4 using knearneigh(). The final spatial weights matrix was constructed using nb2listw().
+
+A geographically weighted regression (GWR) model with Gaussian weighting was then estimated using gwr.sel() and gwr() to produce localized estimates. However, residuals from the GWR model remained spatially autocorrelated, as indicated by a Moran’s I test.
+
+To explicitly account for residual spatial dependence, a Spatial Error Model (SEM) was estimated. This method accounts for spatial autocorrelation by incorporating a function of the spatially dependent residuals within the error term. A Moran’s I test confirmed spatial independence of the SEM residuals, indicating the validity of the estimates. 
 
 
 # References

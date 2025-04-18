@@ -8,11 +8,13 @@ date: "2025-03-25"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+```{r}
+rm(list = ls())
+```
 
 Make sure to run "install.packages("renv")" in the console, and then run "renv::restore()" to retrieve the packages needed to run these markdown files - this ensures that we are all using the same packages
 
-```{r, eval = FALSE}
+```{r, message = FALSE}
 library(tidycensus)
 library(knitr)
 library(tidyverse)
@@ -281,22 +283,36 @@ df_race <- df_race |>
     american_indian_p = american_indian/total_pop,
     pacific_islander_p = pacific_islander/total_pop,
     other_p = other/total_pop,
-    food_stamp_p = food_stamp/total_pop,
-    unemployment_rate = unemployed/lf,
-    children_p = children/total_pop
+    food_stamp_p = food_stamp/total_pop
 )
 ```
 
+```{r}
+#This dataframe contains several control variables for regressions 
+df_race_c <- df_race |>
+  mutate(
+    white_p = white/total_pop,
+    black_p = black/total_pop,
+    asian_p = asian/total_pop,
+    american_indian_p = american_indian/total_pop,
+    pacific_islander_p = pacific_islander/total_pop,
+    other_p = other/total_pop,
+    food_stamp_p = food_stamp/total_pop,
+    unemployment_rate = unemployed/lf,
+    children_p = children/total_pop,
+    non_white_p = 1 - white_p)
+```
+
+```{r}
+df_race_c <- na.omit(df_race_c[, c("geometry", "food_stamp_p", "other_p", "white_p","black_p", "asian_p","american_indian_p", "pacific_islander_p","income", "children_p", "unemployment_rate", "non_white_p")])
+```
 
 #Save: 
 ```{r}
 save(df_race, file = "df_race.RData")
+save(df_race_c, file = "df_race_c.RData")
 ```
 
-#To Evoke: 
-```{r}
-load("df_race.RData")
-```
 
 Tidycensus variables: 
 

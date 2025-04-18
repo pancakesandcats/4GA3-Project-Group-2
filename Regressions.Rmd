@@ -3,6 +3,7 @@ title: "Regressions"
 output: html_document
 ---
 
+#setup
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -12,7 +13,7 @@ rm(list = ls())
 ```
 
 ```{r, eval = FALSE, message = FALSE}
-pkgs <- c("plotly", "spdep")
+pkgs <- c("plotly", "spdep", "spgwr", "leaflet", "spatialreg", "stargazer")
 install.packages(pkgs)
 ```
 
@@ -27,19 +28,241 @@ library(sf)
 library(tidyverse)
 library(units)
 library(spdep)
+library(spgwr)
+library(leaflet)
+library(RColorBrewer)
+library(spatialreg)
+library(stargazer)
 ```
 
 ```{r}
-load("df_race.RData")
+load("df_race_c.RData")
 ```
 
 
+#linear
 ```{r}
-model_linear <- lm(food_stamp_p ~ white_p + black_p +  asian_p + american_indian_p + pacific_islander_p + other_p + income + children_p + unemployment_rate, data = df_race)
+#note: drop other to deal with perfect multicolinearity
+model_linear <- lm(food_stamp_p ~ other_p + black_p +  asian_p + american_indian_p + pacific_islander_p  + income + children_p + unemployment_rate, data = df_race_c, na.action = na.exclude)
 
 summary(model_linear)
 ```
 
+```{r}
+#note: drop other to deal with perfect multicolinearity
+model_linear2 <- lm(food_stamp_p ~ non_white_p + income + children_p + unemployment_rate, data = df_race_c)
+
+summary(model_linear2)
+```
+
+#log
+```{r}
+#note: drop other to deal with perfect multicolinearity
+model_log1 <- lm(formula = log1p(food_stamp_p) ~ other_p + black_p +  asian_p + american_indian_p + pacific_islander_p  + income + children_p + unemployment_rate, data = df_race_c)
+
+summary(model_log1)
+```
+
+```{r}
+#note: drop other to deal with perfect multicolinearity
+model_log2 <- lm(formula = log1p(food_stamp_p) ~ non_white_p + income + children_p + unemployment_rate, data = df_race_c)
+
+summary(model_log2)
+```
 
 
+
+
+##tests of autocorrelation
+```{r}
+df_race_c$r_linear <- model_linear$residuals
+df_race_c$r_linear2 <- model_linear2$residuals
+df_race_c$r_log1 <- model_log1$residuals 
+df_race_c$r_log2 <- model_log2$residuals 
+
+```
+
+```{r}
+map_linear <- plot_ly(df_race_c) |> 
+
+  add_sf(type = "scatter",
+         color = ~(r_linear > 0), 
+         colors = c("red", 
+                    "dodgerblue4")) 
+```
+
+```{r}
+map_log <- plot_ly(df_race_c) |> 
+
+  add_sf(type = "scatter",
+         color = ~(r_log1 > 0), 
+         colors = c("red", 
+                    "dodgerblue4")) 
+```
+
+```{r}
+map_linear
+map_log
+#evidence of autocorrelation, try different techniques 
+```
+
+#spatial weights matrix 
+```{r}
+coords <- CT_centroids <- df_race_c |>
+  st_centroid() |> 
+  st_coordinates()
+
+nb <- knn2nb(knearneigh(coords, k = 4))
+df_race_c.w <- nb2listw(nb, style = "W")
+
+```
+```{r}
+plot(df_race_c |>
+       st_geometry(),
+     border = "gray")
+plot(df_race_c.w, 
+     coords, 
+     col = "red", 
+     add = TRUE)
+```
+
+##moran tests 
+```{r}
+moran.test(df_race_c$r_linear, 
+           df_race_c.w)
+```
+
+
+```{r}
+moran.test(df_race_c$r_log1, 
+           df_race_c.w)
+```
+
+
+```{r}
+ggplot(data = df_race_c, aes(x = non_white_p, 
+                               y = food_stamp_p)) + 
+  geom_point() +
+  geom_abline(slope = model_linear2$coefficients[2], 
+              intercept = model_linear2$coefficients[1], 
+              color = "blue", 
+              linewidth = 1) 
+```
+
+
+#gwr model 
+
+```{r}
+delta <- gwr.sel(
+  formula = food_stamp_p ~ other_p + black_p + asian_p + american_indian_p + pacific_islander_p + income + children_p + unemployment_rate,
+  data = as(df_race_c, "Spatial"),
+  gweight = gwr.Gauss
+)
+```
+
+```{r}
+model.gwr <- gwr(formula = food_stamp_p ~ other_p + black_p + asian_p + american_indian_p + pacific_islander_p + income + children_p + unemployment_rate,
+                 bandwidth = delta, 
+                 data = as(df_race_c, "Spatial"),
+                 gweight = gwr.Gauss)
+model.gwr
+
+```
+
+```{r}
+df_race_c$beta0 <- model.gwr$SDF@data$X.Intercept.
+df_race_c$beta1 <- model.gwr$SDF@data$white_p
+df_race_c$beta2 <- model.gwr$SDF@data$black_p
+df_race_c$beta2 <- model.gwr$SDF@data$black_p
+df_race_c$beta3 <- model.gwr$SDF@data$asian_p
+df_race_c$beta4 <- model.gwr$SDF@data$american_indian_p  
+df_race_c$beta5 <- model.gwr$SDF@data$pacific_islander_p 
+df_race_c$beta6 <- model.gwr$SDF@data$income              
+df_race_c$beta7 <- model.gwr$SDF@data$children_p          
+df_race_c$beta8 <- model.gwr$SDF@data$unemployment_rate   
+df_race_c$localR2 <- model.gwr$SDF@data$localR2
+df_race_c$gwr.e <- model.gwr$SDF@data$gwr.e
+```
+
+
+
+```{r}
+moran.test(df_race_c$gwr.e, df_race_c.w)
+#still autocorrelation is present 
+```
+
+
+
+#spatial error model 
+```{r}
+#add zero policy to deal with missing neighbors 
+model.sem1 <- errorsarlm(
+  food_stamp_p ~ other_p + black_p + asian_p + 
+    american_indian_p + pacific_islander_p + 
+    income + children_p + unemployment_rate,
+  data = df_race_c,
+  listw = df_race_c.w,
+  zero.policy = TRUE)
+
+summary(model.sem1)
+```
+
+```{r}
+morans_result <- moran.test(model.sem1$residuals, df_race_c.w, alternative = "less")
+
+formatted_p <- format(morans_result$p.value, digits = 3)
+
+summary_text <- paste0(
+  "Moran's I = ", round(morans_result$estimate["Moran I statistic"], 4),
+  ", p-value = ", formatted_p
+)
+writeLines(summary_text, "morans_summary.txt")
+```
+
+```{r}
+df_race_c$r_sem <- residuals(model.sem1)
+```
+
+```{r}
+map_sem <-ggplot(df_race_c) +
+  geom_sf(aes(fill = r_sem > 0), color = "white", size = 0.2) +
+  scale_fill_manual(
+    values = c("FALSE" = "#2166ac", "TRUE" = "#b2182b"),
+    name = "Residual > 0",
+    labels = c("No", "Yes")
+  ) +
+  labs(
+    title = "SEM Residuals",
+    fill = "Residual > 0"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
+  )
+ggsave("sem_r_map.png", plot = map_sem, width = 7, height = 6, dpi = 300)
+```
+
+#Save results for display 
+
+```{r}
+stargazer(model.sem1,
+          title = "Spatial Error Model Results",
+          type = "html",
+          dep.var.labels = "Food Stamp Usage (% Tract Population)",
+          covariate.labels = c("Intercept",
+                               "Other Race (%)",
+                               "Black (%)",
+                               "Asian (%)",
+                               "American Indian (%)",
+                               "Pacific Islander (%)",
+                               "Median Household Income",
+                               "Households with Children (%)",
+                               "Unemployment Rate (%)"),
+          notes = "Significance levels: *p < 0.1; **p < 0.05; ***p < 0.01",
+          notes.append = TRUE,
+          star.cutoffs = c(0.1, 0.05, 0.01),
+          out = "sem_results.html")
+```
 
