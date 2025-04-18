@@ -192,6 +192,10 @@ To explicitly account for residual spatial dependence, a Spatial Error Model (SE
 
 # Analysis
 
+```{r}
+df_race <- readRDS("df_race.rds")
+```
+
 ## Descriptive Statistics
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = total_pop)) + 
@@ -251,9 +255,6 @@ ggplot(df_race, aes(fill = food_stamp_p)) +
 
 ## Spatial Statistics 
 
-```{r}
-df_race <- readRDS("df_race.rds")
-```
 
 ### Chloropleth Visualization of Food Stamp Usage in Texas
 ```{r}
