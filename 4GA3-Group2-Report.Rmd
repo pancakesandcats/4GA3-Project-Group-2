@@ -31,7 +31,7 @@ output:
 always_allow_html: true
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -58,7 +58,7 @@ library(viridis) #Viridis colour scheme for mapping
 library(tidycensus)
 ```
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 df_race <- readRDS("df_race.rds")
 ```
 
@@ -147,7 +147,8 @@ tx_tracts <- get_decennial(geography = "tract",
 ggplot() +
   geom_sf(data = tx_tracts,
           fill = "lightgrey") +
-  theme_bw()
+  theme_bw() +
+  labs(title = "Map of Texas, United States Tracts")
 ```
 
 # Data
@@ -197,50 +198,57 @@ df_race <- readRDS("df_race.rds")
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = total_pop)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Total Texas Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = white_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas White Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = black_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas Black Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = asian_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas Asian Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = american_indian_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas American Indian Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = pacific_islander_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo") 
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas Pacific Islander Population Distribution")
 ```
 
 ```{r, echo=FALSE}
 ggplot(df_race, aes(fill = food_stamp_p)) + 
   geom_sf() + 
-  theme_void() +
-  scale_fill_viridis_c(option = "turbo")
+  theme_bw() +
+  scale_fill_viridis_c(option = "turbo") +
+  labs(title = "Map of Texas Food Stamp Usage Distribution")
 ```
 
 ## Spatial Statistics 
@@ -251,7 +259,7 @@ ggplot(df_race, aes(fill = food_stamp_p)) +
 ggplot(df_race) +
   geom_sf(aes(fill = food_stamp_p), color = NA) +
   scale_fill_viridis_c() +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Food Stamp Usage per Capita in Texas",
        fill = "Food Stamp %")
 
@@ -283,7 +291,7 @@ df_race_filter <- df_race_filter %>%
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_food_stamp_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average of Food Stamp Usage in Texas",
     fill = "SMA Food Stamp %"
@@ -304,7 +312,7 @@ df_race_filter <- df_race_filter %>%
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_food_stamp_random), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average of Food Stamp Usage (Null Landscape)",
     fill = "SMA (Randomized)"
@@ -330,7 +338,7 @@ df_race_filter <- df_race_filter %>%
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_white_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % White Population",
     fill = "SMA (% White)"
@@ -342,7 +350,7 @@ ggplot(df_race_filter) +
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_black_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % Black Population",
     fill = "SMA (% Black)"
@@ -354,7 +362,7 @@ ggplot(df_race_filter) +
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_asian_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % Asian Population",
     fill = "SMA (% Asian)"
@@ -366,7 +374,7 @@ ggplot(df_race_filter) +
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_american_indian_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % American Indian Population",
     fill = "SMA (% American Indian)"
@@ -378,7 +386,7 @@ ggplot(df_race_filter) +
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_pacific_islander_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % Pacific Islander Population",
     fill = "SMA (% Pacific Islander)"
@@ -390,7 +398,7 @@ ggplot(df_race_filter) +
 ggplot(df_race_filter) +
   geom_sf(aes(fill = sma_other_p), color = NA) +
   scale_fill_viridis_c(option = "magma", direction = -1) +
-  theme_minimal() +
+  theme_bw() +
   labs(
     title = "Spatial Moving Average: % Other Population",
     fill = "SMA (% Other)"
@@ -417,7 +425,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis of Food Stamp Usage")
 ```
 ``` {r, echo=FALSE}
@@ -435,7 +443,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score (Null)"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis of Food Stamp Usage (Null Landscape)")
 ```
 
@@ -461,7 +469,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % White Population")
 ```
 
@@ -473,7 +481,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % Black Population")
 ```
 
@@ -485,7 +493,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % Asian Population")
 ```
 
@@ -497,7 +505,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % American Indian Population")
 ```
 
@@ -509,7 +517,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % Pacific Islander Population")
 ```
 
@@ -521,7 +529,7 @@ ggplot(df_race_filter) +
     low = "green", mid = "yellow", high = "red", midpoint = 0,
     name = "Gi* Z-Score"
   ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Gi* Hotspot Analysis: % Other Population")
 ```
 
