@@ -194,8 +194,61 @@ insert here
 <<<<<<< HEAD
 # Results
 
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = total_pop)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
 
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = white_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
 
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = black_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = asian_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = american_indian_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = pacific_islander_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = other_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo") 
+```
+
+```{r, echo=FALSE}
+ggplot(df_race, aes(fill = food_stamp_p)) + 
+  geom_sf() + 
+  theme_void() +
+  scale_fill_viridis_c(option = "turbo")
+```
 
 
 ##Regression Analyses 
